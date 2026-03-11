@@ -1,0 +1,47 @@
+# Build results
+bin/
+obj/
+*.dll
+*.exe
+*.pdb
+
+# Visual Studio
+.vs/
+.vscode/
+*.sln.user
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# IDE
+.idea/
+*.swp
+*.sln~
+
+# Dependencies
+packages/
+.nuget/
+*.nupkg
+*.snupkg
+
+# Runtime
+appsettings.*.json
+!appsettings.json
+!appsettings.Development.json
+
+# Logs
+logs/
+*.log
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Testing
+coverage/
+TestResults/
+
+# Environment
+.env
+.env.local
