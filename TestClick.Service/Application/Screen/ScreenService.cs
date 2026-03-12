@@ -27,7 +27,20 @@ namespace TestClick.Service.Application.Screen
             {
                 throw;
             }
-           
+
+        }
+
+        public async Task<List<MScreen?>?> ScreenIns(MScreenIns param)
+        {
+            try
+            {
+                var result = await _db.ActionProcedure("Inv.SpScreenIns", JsonConvert.SerializeObject(param));
+                return JsonConvert.DeserializeObject<List<MScreen?>>(result);
+            }
+            catch
+            {
+                throw;
+            }
         }
     }
 }

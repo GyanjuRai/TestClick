@@ -35,5 +35,24 @@ namespace TestClick.API.Controllers.Application.Screen
                 return BadRequest(APIResponse.Failure(ex.Message));
             }
         }
+
+        [HttpPost]
+        public async Task<IActionResult> ScreenIns([FromBody] MScreenIns param)
+        {
+            try
+            {
+                List<MScreen?>? result = await _service.ScreenIns(param);
+                if (result != null)
+                {
+                    return Ok(APIResponse.Success(result));
+                }
+
+                return NotFound(APIResponse.Success(result, message: "Screen insertion failed"));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(APIResponse.Failure(ex.Message));
+            }
+        }
     }
 }
