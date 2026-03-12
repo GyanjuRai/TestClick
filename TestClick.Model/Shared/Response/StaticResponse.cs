@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
 
 namespace TestClick.Model.Shared.Response
 {
@@ -12,7 +8,7 @@ namespace TestClick.Model.Shared.Response
         {
             return new ResponseModel<T> 
             { 
-                Type = ResponseStatus.Success, 
+                Type = ResponseStatus.Success.ToString(), 
                 Message = message, 
                 Data = Data 
             };
@@ -22,7 +18,7 @@ namespace TestClick.Model.Shared.Response
         {
             return new ResponseModel<object> 
             { 
-                Type = ResponseStatus.Failure, 
+                Type = ResponseStatus.Failure.ToString(), 
                 Message = message, 
                 Data = null 
             };

@@ -41,7 +41,22 @@ namespace TestClick.DataAccess
                 await con.OpenAsync();
                 DynamicParameters parameters = new();
                 parameters.Add("@Json", json, DbType.String);
-                string? result = await con.QueryFirstOrDefaultAsync<string>(storedProcedure, json, commandType: CommandType.StoredProcedure);
+                string? result = await con.QueryFirstOrDefaultAsync<string>(storedProcedure, param: parameters, commandType: CommandType.StoredProcedure);
+                return result ?? "{}";
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+        public async Task<string> RetrievalProcedure(string storedProcedure)
+        {
+            try
+            {
+                using SqlConnection con = new(_connectionString);
+                await con.OpenAsync();
+                string? result = await con.QueryFirstOrDefaultAsync<string>(storedProcedure, commandType: CommandType.StoredProcedure);
                 return result ?? "{}";
             }
             catch
