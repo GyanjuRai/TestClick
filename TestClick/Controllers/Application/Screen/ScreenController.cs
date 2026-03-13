@@ -73,5 +73,23 @@ namespace TestClick.API.Controllers.Application.Screen
                 return BadRequest(APIResponse.Failure(ex.Message));
             }
         }
+
+        [HttpDelete]
+        public async Task<IActionResult> ScreenDel([FromBody] MScreenDel param)
+        {
+            try
+            {
+                MScreen? result = await _service.ScreenDel(param);
+                if (result != null && result.Id > 0)
+                {
+                    return Ok(APIResponse.Success(result));
+                }
+                return NotFound(APIResponse.Success(result, message: "Screen deletion failed"));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(APIResponse.Failure(ex.Message));
+            }
+        }
     }
 }

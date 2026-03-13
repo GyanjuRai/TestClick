@@ -54,7 +54,19 @@ namespace TestClick.Service.Application.Screen
             {
                 throw;
             }
+        }
 
+        public async Task<MScreen?> ScreenDel(MScreenDel param)
+        {
+            try
+            {
+                var result = await _db.ActionProcedure("Inv.SpScreenDel", JsonConvert.SerializeObject(param));
+                return JsonConvert.DeserializeObject<MScreen?>(result);
+            }
+            catch
+            {
+                throw;
+            }
         }
     }
 }
