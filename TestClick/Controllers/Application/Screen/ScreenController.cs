@@ -61,11 +61,10 @@ namespace TestClick.API.Controllers.Application.Screen
             try
             {
                 List<MScreen?>? result = await _service.ScreenUpd(param);
-                if (result != null)
+                if (result != null && result.Any())
                 {
                     return Ok(APIResponse.Success(result));
                 }
-                else if(result == List)
 
                 return NotFound(APIResponse.Success(result, message: "Screen update failed"));
             }
