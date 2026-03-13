@@ -54,5 +54,25 @@ namespace TestClick.API.Controllers.Application.Screen
                 return BadRequest(APIResponse.Failure(ex.Message));
             }
         }
+
+        [HttpPut]
+        public async Task<IActionResult> ScreenUpd([FromBody] MScreenUpd param)
+        {
+            try
+            {
+                List<MScreen?>? result = await _service.ScreenUpd(param);
+                if (result != null)
+                {
+                    return Ok(APIResponse.Success(result));
+                }
+                else if(result == List)
+
+                return NotFound(APIResponse.Success(result, message: "Screen update failed"));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(APIResponse.Failure(ex.Message));
+            }
+        }
     }
 }

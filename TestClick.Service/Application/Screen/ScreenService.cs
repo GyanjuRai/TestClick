@@ -42,5 +42,19 @@ namespace TestClick.Service.Application.Screen
                 throw;
             }
         }
+
+        public async Task<List<MScreen?>?> ScreenUpd(MScreenUpd param)
+        {
+            try
+            {
+                var result = await _db.ActionProcedure("Inv.SpScreenUpd", JsonConvert.SerializeObject(param));
+                return JsonConvert.DeserializeObject<List<MScreen?>>(result);
+            }
+            catch
+            {
+                throw;
+            }
+
+        }
     }
 }

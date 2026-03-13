@@ -47,7 +47,26 @@ namespace TestClick.Model.Application.Screen
 
     public record MScreenPlayerInfo
     {
-        public required int PlayerId { get; set; }
+        public int? Id { get; set; }
+        public int? Status { get; set; }
+        public int? PlayerId { get; set; }
+    }
+
+    public record MScreenUpd
+    {
+        public int Id { get; set; }
+        public required string ScreenName { get; set; }
+        public required string Specification { get; set; }
+        public required string Country { get; set; }
+        public required string City { get; set; }
+        public int PlacementType { get; set; }
+        public required string Placement { get; set; }
+        public int AvgViewer { get; set; }
+        public decimal BasePrice { get; set; }
+        public int Status { get; set; }
+        public int Type { get; set; }
+        public int UpdatedBy { get; set; }
+        public List<MScreenPlayerInfo>? ScreenPlayerInfo { get; set; }
     }
 
     public record MScreenFilter
