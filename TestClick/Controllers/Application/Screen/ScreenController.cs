@@ -17,7 +17,7 @@ namespace TestClick.API.Controllers.Application.Screen
         }
 
         [HttpGet]
-        public async Task<IActionResult> ScreenSel([FromQuery] SelParamModel<MScreenFilter> param)
+        public async Task<IActionResult> GetScreen([FromQuery] SelParamModel<MScreenFilter> param)
         {
             try
             {
@@ -84,7 +84,26 @@ namespace TestClick.API.Controllers.Application.Screen
                 {
                     return Ok(APIResponse.Success(result));
                 }
-                return NotFound(APIResponse.Success(result, message: "Screen deletion failed"));
+                return NotFound(APIResponse.Success<MScreen?>(null, "Screen not found"));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(APIResponse.Failure(ex.Message));
+            }
+        }
+
+        [HttpPost]
+        [Route("bulk")]
+        public async Task<IActionResult> Screen([FromBody] List<MScreenTsk> param)
+        {
+            try
+            {
+                List<MScreen?>? result = await _service.ScreenTsk(param);
+                if (result != null)
+                {
+                    return Ok(APIResponse.Success(result));
+                }
+                return NotFound(APIResponse.Success(result, message: "Screen task operation failed"));
             }
             catch (Exception ex)
             {

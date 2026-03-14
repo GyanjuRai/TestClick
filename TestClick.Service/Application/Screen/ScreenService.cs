@@ -68,5 +68,19 @@ namespace TestClick.Service.Application.Screen
                 throw;
             }
         }
+
+        public async Task<List<MScreen?>?> ScreenTsk(List<MScreenTsk> param)
+        {
+            try
+            {
+                var result = await _db.ActionProcedure("Inv.SpScreenTsk", JsonConvert.SerializeObject(param));
+                return JsonConvert.DeserializeObject<List<MScreen?>>(result);
+            }
+            catch
+            {
+                throw;
+            }
+
+        }
     }
 }

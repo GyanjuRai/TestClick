@@ -32,5 +32,11 @@ namespace TestClick.Interface.Application.Screen
         /// <param name="param"></param>
         /// <returns></returns>
         Task<MScreen?> ScreenDel(MScreenDel param);
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="param"></param>
+        /// <returns></returns>
+        Task<List<MScreen?>?> ScreenTsk(List<MScreenTsk> param);
     }
 }
