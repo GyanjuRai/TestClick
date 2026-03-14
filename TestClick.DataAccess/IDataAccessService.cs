@@ -18,5 +18,11 @@ namespace TestClick.DataAccess
         /// <param name="json"></param>
         /// <returns></returns>
         Task<string> RetrievalProcedure(string storedProcedure, string json);
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="storedProcedure"></param>
+        /// <returns></returns>
+        Task<string> RetrievalProcedure(string storedProcedure);
     }
 }

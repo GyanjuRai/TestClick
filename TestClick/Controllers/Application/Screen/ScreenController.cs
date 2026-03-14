@@ -17,7 +17,7 @@ namespace TestClick.API.Controllers.Application.Screen
         }
 
         [HttpGet]
-        public async Task<IActionResult> ScreenSel([FromQuery] SelParamModel<MScreenFilter> param)
+        public async Task<IActionResult> GetScreen([FromQuery] SelParamModel<MScreenFilter> param)
         {
             try
             {
@@ -29,6 +29,81 @@ namespace TestClick.API.Controllers.Application.Screen
                 }
 
                 return NotFound(APIResponse.Success(result, message: "No screen found"));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(APIResponse.Failure(ex.Message));
+            }
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> ScreenIns([FromBody] MScreenIns param)
+        {
+            try
+            {
+                List<MScreen?>? result = await _service.ScreenIns(param);
+                if (result != null)
+                {
+                    return Ok(APIResponse.Success(result));
+                }
+
+                return NotFound(APIResponse.Success(result, message: "Screen insertion failed"));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(APIResponse.Failure(ex.Message));
+            }
+        }
+
+        [HttpPut]
+        public async Task<IActionResult> ScreenUpd([FromBody] MScreenUpd param)
+        {
+            try
+            {
+                List<MScreen?>? result = await _service.ScreenUpd(param);
+                if (result != null && result.Any())
+                {
+                    return Ok(APIResponse.Success(result));
+                }
+
+                return NotFound(APIResponse.Success(result, message: "Screen update failed"));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(APIResponse.Failure(ex.Message));
+            }
+        }
+
+        [HttpDelete]
+        public async Task<IActionResult> ScreenDel([FromBody] MScreenDel param)
+        {
+            try
+            {
+                MScreen? result = await _service.ScreenDel(param);
+                if (result != null && result.Id > 0)
+                {
+                    return Ok(APIResponse.Success(result));
+                }
+                return NotFound(APIResponse.Success<MScreen?>(null, "Screen not found"));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(APIResponse.Failure(ex.Message));
+            }
+        }
+
+        [HttpPost]
+        [Route("Tsk")]
+        public async Task<IActionResult> ScreenIns([FromBody] List<MScreenTsk> param)
+        {
+            try
+            {
+                List<MScreen?>? result = await _service.ScreenTsk(param);
+                if (result != null)
+                {
+                    return Ok(APIResponse.Success(result));
+                }
+                return NotFound(APIResponse.Success(result, message: "Screen task operation failed"));
             }
             catch (Exception ex)
             {

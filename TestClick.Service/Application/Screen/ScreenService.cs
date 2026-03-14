@@ -27,7 +27,60 @@ namespace TestClick.Service.Application.Screen
             {
                 throw;
             }
-           
+
+        }
+
+        public async Task<List<MScreen?>?> ScreenIns(MScreenIns param)
+        {
+            try
+            {
+                var result = await _db.ActionProcedure("Inv.SpScreenIns", JsonConvert.SerializeObject(param));
+                return JsonConvert.DeserializeObject<List<MScreen?>>(result);
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+        public async Task<List<MScreen?>?> ScreenUpd(MScreenUpd param)
+        {
+            try
+            {
+                var result = await _db.ActionProcedure("Inv.SpScreenUpd", JsonConvert.SerializeObject(param));
+                return JsonConvert.DeserializeObject<List<MScreen?>>(result);
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+        public async Task<MScreen?> ScreenDel(MScreenDel param)
+        {
+            try
+            {
+                var result = await _db.ActionProcedure("Inv.SpScreenDel", JsonConvert.SerializeObject(param));
+                return JsonConvert.DeserializeObject<MScreen?>(result);
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+        public async Task<List<MScreen?>?> ScreenTsk(List<MScreenTsk> param)
+        {
+            try
+            {
+                var result = await _db.ActionProcedure("Inv.SpScreenTsk", JsonConvert.SerializeObject(param));
+                return JsonConvert.DeserializeObject<List<MScreen?>>(result);
+            }
+            catch
+            {
+                throw;
+            }
+
         }
     }
 }

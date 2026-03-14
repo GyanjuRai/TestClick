@@ -15,9 +15,15 @@ namespace TestClick.Model.Shared.Response
 
     public class ResponseModel<T>
     {
-        public ResponseStatus Type { get; set; }
+        public required string Type { get; set; }
         public required string Message { get; set; }
         public T? Data { get; set; }
+    }
+
+    public record MvDropdown
+    {
+        public required int Id { get; set; }
+        public required string Name { get; set; }
     }
 
     public enum ResponseStatus

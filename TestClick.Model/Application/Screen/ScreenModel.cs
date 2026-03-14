@@ -9,6 +9,29 @@ namespace TestClick.Model.Application.Screen
     public class MScreen
     {
         public int Id { get; set; }
+        public int? TenantId { get; set; }
+        public required string ScreenName { get; set; }
+        public required string Specification { get; set; }
+        public required string Country { get; set; }
+        public required string City { get; set; }
+        public int PlacementType { get; set; }
+        public required string Placement { get; set; }
+        public int AvgViewer { get; set; }
+        public decimal BasePrice { get; set; }
+        public int Status { get; set; }
+        public int Type { get; set; }
+        public int CreatedBy { get; set; }
+        public bool IsDeleted { get; set; } = false;
+        public int? UpdatedBy { get; set; }
+        public DateTime CreatedAt { get; set; }
+        public DateTime? UpdatedAt { get; set; }
+        public string? Players { get; set; }
+        public string? TenantName { get; set; }
+        public string? ScreenPlayer { get; set; }
+    }
+
+    public record MScreenIns
+    {
         public int TenantId { get; set; }
         public required string ScreenName { get; set; }
         public required string Specification { get; set; }
@@ -17,13 +40,65 @@ namespace TestClick.Model.Application.Screen
         public int PlacementType { get; set; }
         public required string Placement { get; set; }
         public int AvgViewer { get; set; }
-        public decimal basePrice { get; set; }
+        public decimal BasePrice { get; set; }
         public int Status { get; set; }
         public int Type { get; set; }
         public int CreatedBy { get; set; }
-        public int? UpdatedBy { get; set; }
-        public DateTime CreatedAt { get; set; }
-        public DateTime? UpdatedAt { get; set; }
+        public List<MScreenPlayerInfo>? ScreenPlayerInfo { get; set; }
+    }
+
+    public record MScreenTsk
+    {
+        public int? Id { get; set; }
+        public int TenantId { get; set; }
+        public required string ScreenName { get; set; }
+        public required string Specification { get; set; }
+        public required string Country { get; set; }
+        public required string City { get; set; }
+        public int PlacementType { get; set; }
+        public required string Placement { get; set; }
+        public int AvgViewer { get; set; }
+        public decimal BasePrice { get; set; }
+        public int Status { get; set; }
+        public int Type { get; set; }
+        public int UserId { get; set; }
+    }
+
+        public record MScreenPlayerInfo
+    {
+        public int? Id { get; set; }
+        public int? Status { get; set; }
+        public int? PlayerId { get; set; }
+    }
+
+    public record MScreenUpd
+    {
+        public int Id { get; set; }
+        public required string ScreenName { get; set; }
+        public required string Specification { get; set; }
+        public required string Country { get; set; }
+        public required string City { get; set; }
+        public int PlacementType { get; set; }
+        public required string Placement { get; set; }
+        public int AvgViewer { get; set; }
+        public decimal BasePrice { get; set; }
+        public int Status { get; set; }
+        public int Type { get; set; }
+        public int UpdatedBy { get; set; }
+        public List<MScreenPlayerInfo>? ScreenPlayerInfo { get; set; }
+    }
+
+    public record MScreenDel
+    {
+        public required int Id { get; set; }
+        public required int UpdatedBy { get; set; }
+        public MScreenPlayerIdParam? ScreenPlayerId { get; set; }
+    }
+
+    public record MScreenPlayerIdParam
+    {
+        public required int Id { get; set; }
+
     }
 
     public record MScreenFilter
