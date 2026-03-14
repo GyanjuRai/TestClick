@@ -14,7 +14,8 @@ namespace TestClick.API.Controllers.Shared.Util
         }
 
         [HttpGet]
-        public async Task<IActionResult> PlayerDropdownSel()
+        [Route("Player")]
+        public async Task<IActionResult> GetDropdown()
         {
             try
             {
