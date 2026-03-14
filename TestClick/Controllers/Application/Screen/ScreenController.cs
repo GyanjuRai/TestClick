@@ -93,8 +93,8 @@ namespace TestClick.API.Controllers.Application.Screen
         }
 
         [HttpPost]
-        [Route("bulk")]
-        public async Task<IActionResult> Screen([FromBody] List<MScreenTsk> param)
+        [Route("Tsk")]
+        public async Task<IActionResult> ScreenIns([FromBody] List<MScreenTsk> param)
         {
             try
             {
