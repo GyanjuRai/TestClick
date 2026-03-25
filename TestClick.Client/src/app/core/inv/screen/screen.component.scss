@@ -1,0 +1,440 @@
+// ============================================
+// SCSS LESSON: Variables
+// Think of these like JavaScript const values.
+// You define once, reuse everywhere.
+// ============================================
+
+// -- Colors --
+$primary: #4ade80;          // green-400
+$primary-dark: #16a34a;     // darker green for hover
+$primary-light: #bbf7d0;    // light green tint
+$primary-bg: #f0fdf4;       // very light green bg
+
+$white: #ffffff;
+$surface: #f8fafc;          // off-white for rows
+$border: #e2e8f0;           // subtle border
+$text-main: #0f172a;        // almost black
+$text-muted: #64748b;       // grey text
+$text-light: #94a3b8;       // lighter grey
+
+$online: #22c55e;
+$offline: #ef4444;
+$pending: #f59e0b;
+
+// -- Spacing --
+$sidebar-width: 230px;
+
+// -- Font --
+$font-body: 'DM Sans', sans-serif;
+$font-mono: 'Space Mono', monospace;
+
+
+// ============================================
+// SCSS LESSON: Mixins
+// Think of these like reusable CSS functions.
+// You call them with @include.
+// ============================================
+
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+}
+
+@mixin flex-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+// ============================================
+// TOP BAR
+// ============================================
+
+.topbar {
+  @include flex-between;
+  padding: 18px 28px;
+  border-bottom: 1px solid $border;
+  background: $white;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+
+  &-left {
+    @include flex-center;
+    gap: 12px;
+
+    .page-title {
+      font-size: 20px;
+      font-weight: 600;
+      letter-spacing: -0.3px;
+    }
+
+    .page-count {
+      font-size: 12px;
+      color: $text-muted;
+      background: $surface;
+      border: 1px solid $border;
+      padding: 2px 10px;
+      border-radius: 20px;
+    }
+  }
+
+  &-right {
+    @include flex-center;
+    gap: 10px;
+  }
+}
+
+.search-box {
+  @include flex-center;
+  gap: 8px;
+  background: $surface;
+  border: 1px solid $border;
+  border-radius: 8px;
+  padding: 7px 12px;
+  width: 220px;
+  transition: border-color 0.2s;
+
+  &:focus-within {
+    border-color: $primary;
+  }
+
+  .search-icon {
+    color: $text-light;
+    font-size: 16px;
+  }
+
+  input {
+    background: none;
+    font-size: 13px;
+    color: $text-main;
+    width: 100%;
+
+    &::placeholder { color: $text-light; }
+  }
+}
+
+// Buttons
+.btn {
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 500;
+  transition: all 0.15s;
+
+  &--primary {
+    background: $primary;
+    color: $white;
+
+    &:hover { background: $primary-dark; }
+  }
+
+  &--secondary {
+    background: $white;
+    color: $text-main;
+    border: 1px solid $border;
+
+    &:hover { background: $surface; }
+  }
+}
+
+
+// ============================================
+// STATS STRIP
+// ============================================
+
+.stats-strip {
+  @include flex-center;
+  gap: 0;
+  border-bottom: 1px solid $border;
+  padding: 0 28px;
+}
+
+.stat-card {
+  @include flex-center;
+  gap: 8px;
+  padding: 14px 24px 14px 0;
+  margin-right: 24px;
+  border-right: 1px solid $border;
+
+  &:last-child {
+    border-right: none;
+  }
+
+  .stat-value {
+    font-size: 18px;
+    font-weight: 600;
+    font-family: $font-mono;
+    color: $text-main;
+  }
+
+  .stat-label {
+    font-size: 12px;
+    color: $text-muted;
+  }
+
+  .stat-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+
+    // SCSS LESSON: Modifier classes
+    &.online  { background: $online; }
+    &.offline { background: $offline; }
+    &.pending { background: $pending; }
+  }
+}
+
+
+// ============================================
+// SCREEN GRID TABLE
+// ============================================
+
+.screen-grid {
+  padding: 20px 28px;
+}
+
+// Shared column layout using CSS grid
+// Both header and rows use the same grid template = columns align perfectly
+.grid-header,
+.grid-row {
+  display: grid;
+  grid-template-columns: 36px 2fr 1.6fr 100px 1.4fr 110px 130px 40px;
+  align-items: center;
+  gap: 12px;
+}
+
+.grid-header {
+  padding: 8px 14px;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  color: $text-light;
+  border-bottom: 2px solid $border;
+  margin-bottom: 4px;
+}
+
+.grid-row {
+  padding: 12px 14px;
+  border-radius: 10px;
+  border: 1px solid transparent;
+  transition: border-color 0.15s, background 0.15s;
+
+  &:hover {
+    background: $surface;
+    border-color: $border;
+  }
+
+  // Alternating row color — super light
+  &:nth-child(even) { background: #fafafa; }
+  &:nth-child(even):hover { background: $surface; }
+
+  // Screen name + id
+  .col-screen {
+    @include flex-center;
+    gap: 10px;
+  }
+
+  .screen-thumb {
+    width: 32px;
+    height: 32px;
+    background: $primary-bg;
+    border: 1px solid $primary-light;
+    color: $primary-dark;
+    font-size: 12px;
+    font-weight: 700;
+    border-radius: 6px;
+    @include flex-center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .screen-name {
+    display: block;
+    font-weight: 500;
+    font-size: 13.5px;
+  }
+
+  .screen-id {
+    display: block;
+    font-size: 11px;
+    color: $text-light;
+    font-family: $font-mono;
+  }
+
+  .col-location { color: $text-muted; font-size: 13px; }
+  .col-campaign  { color: $text-muted; font-size: 13px; }
+  .col-impressions {
+    font-family: $font-mono;
+    font-size: 13px;
+    font-weight: 500;
+  }
+
+  .col-players {
+    @include flex-center;
+    gap: 8px;
+    font-size: 12px;
+    font-family: $font-mono;
+  }
+}
+
+// Status badges
+.badge {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 600;
+
+  &--online  { background: #dcfce7; color: #15803d; }
+  &--offline { background: #fee2e2; color: #b91c1c; }
+  &--pending { background: #fef3c7; color: #92400e; }
+}
+
+// Uptime progress bar
+.uptime-bar {
+  flex: 1;
+  height: 4px;
+  background: $border;
+  border-radius: 4px;
+  overflow: hidden;
+
+  .uptime-fill {
+    height: 100%;
+    background: $primary;
+    border-radius: 4px;
+    transition: width 0.4s ease;
+  }
+}
+
+// Action dots button
+.action-btn {
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  font-size: 16px;
+  color: $text-light;
+  @include flex-center;
+  justify-content: center;
+  transition: background 0.15s;
+
+  &:hover {
+    background: $border;
+    color: $text-main;
+  }
+}
+
+// Checkboxes
+input[type="checkbox"] {
+  accent-color: $primary;
+  width: 14px;
+  height: 14px;
+  cursor: pointer;
+}
+
+// ============================================
+// PAGINATION
+// ============================================
+
+.grid-pagination {
+  @include flex-between;
+  padding: 16px 14px 4px;
+  border-top: 1px solid $border;
+  margin-top: 8px;
+
+  .pagination-info {
+    font-size: 12px;
+    color: $text-muted;
+  }
+
+  .pagination-controls {
+    @include flex-center;
+    gap: 4px;
+    font-size: 13px;
+    color: $text-muted;
+  }
+}
+
+.page-btn {
+  width: 50px;
+  height: 30px;
+  border-radius: 6px;
+  font-size: 13px;
+  color: $text-muted;
+  border: 1px solid $border;
+  transition: all 0.15s;
+
+  &:hover { background: $surface; color: $text-main; }
+
+  &.active {
+    background: $primary;
+    color: $white;
+    border-color: $primary;
+    font-weight: 600;
+  }
+}
+
+// ==========================================
+// ACTION BTN BAR
+// ==========================================
+
+.actionbtn-bar {
+  display: flex;
+  justify-content: flex-end;
+  padding:  14px 28px 10px;
+
+  &-right {
+    @include flex-center;
+    gap: 8px;
+  }
+}
+
+.actionbtn-bar-btn {
+  @include flex-between();
+  gap: 8px;
+  padding: 15px 20px;
+  border-radius:  8px;
+  border: 1px solid $border;
+  background: $white;
+  transition: all 0.15s;
+
+  .btn-icon {
+    font-size: 20px;
+    line-height: 1;
+  }
+
+  &.btn-add {
+    background: $primary;
+    color: $white;
+    border-color: $primary;
+
+    &:hover { background: $primary-dark; border-color: $primary-dark;}
+  }
+
+  &.btn-update {
+    background: $pending;
+    color: $white;
+    border-color: $pending;
+
+    // &:hover {
+      
+    // }
+  }
+
+  &.btn-delete {
+    background: $offline;
+    color: $white;
+    border-color: $offline;
+
+    &:hover {
+      background: #b91c1c;
+      border: #fca5a5;
+    }
+  }
+
+  // &.btn-refresh {
+
+  // }
+}
+

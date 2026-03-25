@@ -1,0 +1,209 @@
+// ============================================
+// SCSS LESSON: Variables
+// Think of these like JavaScript const values.
+// You define once, reuse everywhere.
+// ============================================
+
+// -- Colors --
+$primary: #4ade80;          // green-400
+$primary-dark: #16a34a;     // darker green for hover
+$primary-light: #bbf7d0;    // light green tint
+$primary-bg: #f0fdf4;       // very light green bg
+
+$white: #ffffff;
+$surface: #f8fafc;          // off-white for rows
+$border: #e2e8f0;           // subtle border
+$text-main: #0f172a;        // almost black
+$text-muted: #64748b;       // grey text
+$text-light: #94a3b8;       // lighter grey
+
+$online: #22c55e;
+$offline: #ef4444;
+$pending: #f59e0b;
+
+// -- Spacing --
+$sidebar-width: 230px;
+
+// -- Font --
+$font-body: 'DM Sans', sans-serif;
+$font-mono: 'Space Mono', monospace;
+
+
+// ============================================
+// SCSS LESSON: Mixins
+// Think of these like reusable CSS functions.
+// You call them with @include.
+// ============================================
+
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+}
+
+@mixin flex-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+
+// ============================================
+// BASE RESET
+// ============================================
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: $font-body;
+  background: $white;
+  color: $text-main;
+  display: flex;
+  min-height: 100vh;
+  font-size: 14px;
+}
+
+ul { list-style: none; }
+input { outline: none; border: none; font-family: $font-body; }
+button { cursor: pointer; font-family: $font-body; border: none; background: none; }
+
+
+// ============================================
+// SIDEBAR
+// ============================================
+
+.sidebar {
+  width: $sidebar-width;
+  min-height: 100vh;
+  background: $white;
+  border-right: 1px solid $border;
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  top: 0;
+  left: 0;
+
+  // SCSS LESSON: Nesting
+  // You can nest child selectors inside the parent.
+  // This keeps related styles grouped together.
+
+  &-logo {
+    @include flex-center;
+    gap: 10px;
+    padding: 20px 20px 18px;
+    border-bottom: 1px solid $border;
+
+    .logo-icon {
+      font-size: 22px;
+      color: $primary;
+    }
+
+    .logo-text {
+      font-family: $font-mono;
+      font-size: 15px;
+      font-weight: 700;
+      color: $text-main;
+      letter-spacing: -0.3px;
+    }
+  }
+
+  &-nav {
+    padding: 16px 12px;
+    flex: 1;
+
+    .nav-label {
+      font-size: 10px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: $text-light;
+      padding: 12px 8px 6px;
+    }
+
+    .nav-item {
+      @include flex-center;
+      gap: 10px;
+      padding: 9px 10px;
+      border-radius: 8px;
+      color: $text-muted;
+      font-size: 13.5px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background 0.15s, color 0.15s;
+
+      // SCSS LESSON: & means "this element"
+      // &:hover = .nav-item:hover
+      &:hover {
+        background: $surface;
+        color: $text-main;
+      }
+
+      // &.active = .nav-item.active
+      &.active {
+        background: $primary-bg;
+        color: $primary-dark;
+
+        .nav-icon { color: $primary; }
+      }
+
+      .nav-icon {
+        font-size: 16px;
+        width: 20px;
+        text-align: center;
+        color: $text-light;
+      }
+    }
+  }
+
+  &-footer {
+    @include flex-center;
+    gap: 10px;
+    padding: 14px 16px;
+    border-top: 1px solid $border;
+
+    .user-avatar {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: $primary;
+      color: $white;
+      font-size: 12px;
+      font-weight: 600;
+      @include flex-center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .user-info {
+      display: flex;
+      flex-direction: column;
+
+      .user-name {
+        font-size: 13px;
+        font-weight: 600;
+        color: $text-main;
+      }
+      .user-role {
+        font-size: 11px;
+        color: $text-muted;
+      }
+    }
+  }
+}
+
+
+// ============================================
+// MAIN AREA
+// ============================================
+
+main {
+  margin-left: $sidebar-width;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+

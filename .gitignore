@@ -45,3 +45,6 @@ TestResults/
 # Environment
 .env
 .env.local
+
+# Const
+Const
