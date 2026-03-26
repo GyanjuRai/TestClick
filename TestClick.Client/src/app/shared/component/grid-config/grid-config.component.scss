@@ -1,0 +1,99 @@
+@use '../../scss/variable.scss' as vars;
+
+// ============================================
+// SCREEN GRID TABLE
+// ============================================
+
+.grid {
+  padding: 20px 28px;
+}
+
+// Both header and rows use the same grid template = columns align perfectly
+.grid-header,
+.grid-row {
+  display: grid;
+  grid-template-columns: 36px 2fr 1.6fr 100px 1.4fr 110px 130px 40px;
+  align-items: center;
+  gap: 12px;
+}
+
+.grid-header {
+  padding: 8px 14px;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  color: vars.$text-light;
+  border-bottom: 2px solid vars.$border;
+  margin-bottom: 4px;
+}
+
+.grid-row {
+  padding: 12px 14px;
+  border-radius: 10px;
+  border: 1px solid transparent;
+  transition: border-color 0.15s, background 0.15s;
+
+  &:hover {
+    background: vars.$surface;
+    border-color: vars.$border;
+  }
+
+  // Alternating row color — super light
+  &:nth-child(even) { background: #fafafa; }
+  &:nth-child(even):hover { background: vars.$surface; }
+
+  .grid-col {
+    @include vars.flex-center;
+    gap: 10px;
+  }
+
+  .grid-data {
+    display: block;
+    font-weight: 500;
+    font-size: 13.5px;
+  }
+
+}
+
+// ============================================
+// PAGINATION
+// ============================================
+
+.grid-pagination {
+  @include vars.flex-between;
+  padding: 16px 14px 4px;
+  border-top: 1px solid vars.$border;
+  margin-top: 8px;
+
+  .pagination-info {
+    font-size: 12px;
+    color: vars.$text-muted;
+  }
+
+  .pagination-controls {
+    @include vars.flex-center;
+    gap: 4px;
+    font-size: 13px;
+    color: vars.$text-muted;
+  }
+}
+
+.page-btn {
+  width: 50px;
+  height: 30px;
+  border-radius: 6px;
+  font-size: 13px;
+  color: vars.$text-muted;
+  border: 1px solid vars.$border;
+  transition: all 0.15s;
+
+  &:hover { background: vars.$surface; color: vars.$text-main; }
+
+  &.active {
+    background: vars.$primary;
+    color: vars.$white;
+    border-color: vars.$primary;
+    font-weight: 600;
+  }
+}

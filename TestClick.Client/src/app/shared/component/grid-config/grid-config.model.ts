@@ -8,7 +8,7 @@
  */
 export interface gridColumn {
     name: string;
-    type: string;
+    type: 'text' | 'number';
     columnName: string;
     width?: string;
 }
@@ -16,12 +16,13 @@ export interface gridColumn {
 /**
  * Configures the grid
  * 
+ * @columns List of gridColumn
+ * @Data Object with data (any[]) and totalRows
  */
 export interface gridConfig {
     columns: gridColumn[];
-    data: {
+    dataSource: {
         data: any[],
         totalRows: number
-    },
-    rowActionButtons: boolean
+    }
 }

@@ -1,9 +1,9 @@
 import { Injectable } from "@angular/core";
 import { WebApiService } from "./web-api.service";
 import { Observable } from "rxjs";
-import { gridResponse, responseModel } from "../model/response.model";
-import { mScreen, mScreenFilter } from "../model/screen.model";
-import { selParamModel } from "../model/param.model";
+import { gridResponse, responseModel } from "../../shared/model/response.model";
+import { mScreen, mScreenFilter } from "../../shared/model/screen.model";
+import { selParamModel } from "../../shared/model/param.model";
 
 @Injectable({
     providedIn: 'root'

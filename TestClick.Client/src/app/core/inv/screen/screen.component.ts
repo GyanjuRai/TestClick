@@ -1,10 +1,12 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ScreenService } from '../../service/screen.service';
-import { selParamModel } from '../../model/param.model';
-import { mScreen, mScreenFilter } from '../../model/screen.model';
-import { gridResponse, responseModel } from '../../model/response.model';
-import { responseStatuEnum } from '../../model/response.enum';
+import { selParamModel } from '../../../shared/model/param.model';
+import { mScreen, mScreenFilter } from '../../../shared/model/screen.model';
+import { gridResponse, responseModel } from '../../../shared/model/response.model';
+import { responseStatuEnum } from '../../../shared/model/enum';
 import { Subject, takeUntil } from 'rxjs';
+import { gridConfig } from '../../../shared/component/grid-config/grid-config.model';
+import { screenColumns } from './screen.column';
 
 @Component({
   selector: 'ScreenComponent',
@@ -12,7 +14,15 @@ import { Subject, takeUntil } from 'rxjs';
   styleUrl: './screen.component.scss'
 })
 export class ScreenComponent implements OnInit, OnDestroy {
+
   private __unSubscribeAll: Subject<any>;
+  gridConfig: gridConfig = {
+    columns: screenColumns,
+    dataSource: {
+      data : [],
+      totalRows: 0
+    }
+  }
   screens: mScreen[] = [];
 
   constructor(private _ss: ScreenService) 
@@ -35,9 +45,15 @@ export class ScreenComponent implements OnInit, OnDestroy {
     .pipe(takeUntil(this.__unSubscribeAll))
     .subscribe((response: responseModel<gridResponse<mScreen>>) => {
       if(response.type === responseStatuEnum.success && response.data) {
-        this.screens = response.data.data ?? [];
+        this.gridConfig.dataSource.data = response.data.data ?? [];
+
+        this.gridConfig = {...this.gridConfig}; // Refresh the grid. Implemented ngOnChanges
       }
     });
+  }
+
+  selectedRow(event: any) {
+    console.log(event);
   }
 
   ngOnDestroy(): void {

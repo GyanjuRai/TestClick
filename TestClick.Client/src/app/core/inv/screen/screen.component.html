@@ -33,56 +33,7 @@
 
 </section>
 
-<section class="screen-grid">
-
-    <!-- GRID HEADER -->
-    <div class="grid-header">
-        <div class="col-check"><input type="checkbox" /></div>
-        <div class="col-screen">Screen</div>
-        <div class="col-location">Tenant</div>
-        <div class="col-status">Status</div>
-        <div class="col-campaign">Placement</div>
-        <div class="col-impressions">Base Price</div>
-        <div class="col-players">Players</div>
-    </div>
-
-    <!-- ROWS -->
-    <div class="grid-row" *ngFor="let screen of screens">
-        <div class="col-screen">
-            <div class="screen-meta">
-                <span class="screen-name">{{ screen.screenName }}</span>
-            </div>
-        </div>
-        <div class="col-screen">
-            <div class="screen-meta">
-                <span class="screen-name">{{ screen.tenantName ?? 'Platform owner'}}</span>
-            </div>
-        </div>
-        <div class="col-status">
-            <div class="col-status">
-                @if (screen.status == 1) {
-                    <span class="badge badge--online">Online</span>
-                }
-                @else {
-                    <span class="badge badge--offline">Offline</span>
-                }
-            </div>
-        </div>
-        <div class="col-location">{{ screen.placement }}</div>
-        <div class="col-impressions">{{ screen.basePrice }}</div>
-        <div class="col-campaign">{{ screen.players ?? 'no players' }}</div>
-    </div>
-
-    <!-- PAGINATION -->
-    <div class="grid-pagination">
-        <span class="pagination-info">Showing 1–6 of 124</span>
-        <div class="pagination-controls">
-            <button class="page-btn">Prev</button>
-            <button class="page-btn active">1</button>
-            <button class="page-btn">2</button>
-            <button class="page-btn">3</button>
-            <button class="page-btn">Next</button>
-        </div>
-    </div>
-
-</section>
+<GridComponent
+    [gridConfig]="gridConfig"
+    (clickRow)="selectedRow($event)"
+/>

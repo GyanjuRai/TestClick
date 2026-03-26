@@ -1,0 +1,45 @@
+// ============================================
+// Variables
+// ============================================
+
+// -- Colors --
+$primary: #4ade80;          // green-400
+$primary-dark: #16a34a;     // darker green for hover
+$primary-light: #bbf7d0;    // light green tint
+$primary-bg: #f0fdf4;       // very light green bg
+
+$white: #ffffff;
+$surface: #f8fafc;          // off-white for rows
+$border: #e2e8f0;           // subtle border
+$text-main: #0f172a;        // almost black
+$text-muted: #64748b;       // grey text
+$text-light: #94a3b8;       // lighter grey
+
+$online: #22c55e;
+$offline: #ef4444;
+$pending: #f59e0b;
+
+// -- Spacing --
+$sidebar-width: 230px;
+
+// -- Font --
+$font-body: 'DM Sans', sans-serif;
+$font-mono: 'Space Mono', monospace;
+
+
+// ============================================
+// Mixins
+// like reusable CSS functions.
+// call them with @include.
+// ============================================
+
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+}
+
+@mixin flex-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}

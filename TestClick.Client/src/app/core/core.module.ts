@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ScreenComponent } from './inv/screen/screen.component';
 import { RouterModule } from '@angular/router';
 import { coreRoutes } from './core.routing';
+import { GridConfigModule } from "../shared/component/grid-config/grid-config.module";
 
 
 
@@ -12,7 +13,8 @@ import { coreRoutes } from './core.routing';
   ],
   imports: [
     CommonModule,
-    RouterModule.forChild(coreRoutes)
-  ]
+    RouterModule.forChild(coreRoutes),
+    GridConfigModule
+]
 })
 export class CoreModule { }
