@@ -1,4 +1,4 @@
-using Microsoft.AspNetCore.Builder;
+using TestClick.API.Const;
 using TestClick.API.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -11,9 +11,9 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("cors", policy =>
+    options.AddPolicy(AppConst.AppPolicy, policy =>
     {
-        policy.WithOrigins("http://localhost:4200")
+        policy.WithOrigins(AppConst.WebUrl)
                 .AllowAnyHeader()
                 .AllowAnyMethod()
                 .AllowCredentials();
@@ -31,7 +31,7 @@ app.UseHttpsRedirection();
 
 app.UseAuthorization();
 
-app.UseCors("cors");
+app.UseCors(AppConst.AppPolicy);
 
 app.MapControllers();
 
