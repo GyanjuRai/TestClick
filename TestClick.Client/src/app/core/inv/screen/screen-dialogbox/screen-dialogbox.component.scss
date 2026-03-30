@@ -1,4 +1,4 @@
-@use '../../../../shared/scss/variable.scss' as vars;
+@use "../../../../shared/scss/variable.scss" as vars;
 
 .form-wrapper {
   display: flex;
@@ -47,6 +47,11 @@
 .form-field input:focus,
 .form-field select:focus {
   border-color: vars.$primary;
+}
+
+.form-field small {
+  color: vars.$offline;
+  font-size: 12px;
 }
 
 .form-actions {

@@ -10,6 +10,7 @@ export class GridConfigComponent implements OnChanges {
 
   @Input() gridConfig!: gridConfig;
   @Output() clickRow = new EventEmitter<any>();
+  @Output() rowDblClick = new EventEmitter<any>();
 
   protected columns!: string[];
   private selectedRow!: any;
@@ -32,5 +33,9 @@ export class GridConfigComponent implements OnChanges {
   public selectRow(row: any) :void {
     this.selectedRow = row;
     this.clickRow.emit(this.selectedRow);
+  }
+
+  public doubleClickRow(row: any) :void {
+    this.rowDblClick.emit(this.selectedRow);
   }
 }

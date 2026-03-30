@@ -5,19 +5,19 @@ export const screenDialogFields: DialogField[] = [
     label: 'Screen Name',
     name: 'screenName',
     type: 'text',
-    required: true
+    required: true,
   },
   {
     label: 'Specification',
     name: 'specification',
     type: 'textarea',
-    required: true
+    required: true,
   },
   {
     label: 'Country',
     name: 'country',
     type: 'text',
-    required: true
+    required: true,
   },
   {
     label: 'Placement Type',
@@ -32,13 +32,13 @@ export const screenDialogFields: DialogField[] = [
     label: 'Placement',
     name: 'placement',
     type: 'text',
-    required: true
+    required: true,
   },
   {
     label: 'Impressions',
     name: 'avgViewer',
     type: 'number',
-    required: true
+    required: true,
   },
   {
     label: 'Status',
@@ -57,5 +57,5 @@ export const screenDialogFields: DialogField[] = [
       { label: 'Analog', value: 1 },
       { label: 'Digital', value: 2 },
     ],
-  }
+  },
 ];

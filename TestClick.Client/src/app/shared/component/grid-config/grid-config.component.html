@@ -8,7 +8,7 @@
 
   <!-- ROWS -->
   <div class="grid-row" *ngFor="let data of gridConfig.dataSource.data">
-    <div class="grid-col" (click)="selectRow(data)" *ngFor="let col of columns">
+    <div class="grid-col" (click)="selectRow(data)" (dblclick)="doubleClickRow(data)" *ngFor="let col of columns">
       <div class="grid-data-wrapper">
         <span class="grid-data">{{ data[col] || "!" }}</span>
       </div>

@@ -5,6 +5,7 @@ import { ScreenComponent } from './screen/screen.component';
 import { GridConfigModule } from '../../shared/component/grid-config/grid-config.module';
 import { ScreenDialogboxComponent } from './screen/screen-dialogbox/screen-dialogbox.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 const invRoutes: Route[] = [
   {
@@ -28,6 +29,7 @@ const invRoutes: Route[] = [
     RouterModule.forChild(invRoutes),
     GridConfigModule,
     ReactiveFormsModule,
+    FontAwesomeModule,
   ]
 })
 export class InvModule { }

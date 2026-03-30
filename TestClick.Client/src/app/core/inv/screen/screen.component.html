@@ -1,39 +1,36 @@
 <header class="topbar">
-    <div class="topbar-left">
-        <h1 class="page-tittle">Screens</h1>
-        <span class="page-count">{{ screens.length + ' screens' }}</span>
-    </div>
+  <div class="topbar-left">
+    <h1 class="page-tittle">Screens</h1>
+    <span class="page-count">{{ screens.length + " screens" }}</span>
+  </div>
 </header>
 
 <section class="actionbtn-bar">
-
-    <div class="actionbtn-bar-right">
-        <button class="actionbtn-bar-btn btn-add" title="Add" (click)="openDialog('add')">
-            <span class="btn-icon">
-                <i class="fa-regular fa-plus"></i>
-            </span>
-        </button>
-        <button class="actionbtn-bar-btn btn-update" title="Update">
-            <span class="btn-icon">
-                <i class="fa-regular fa-pen"></i>
-            </span>
-        </button>
-        <button class="actionbtn-bar-btn btn-delete custom-tooltip" title="Delete">
-            <span class="btn-icon">
-                <i class="fa-regular fa-trash"></i>
-            </span>
-        </button>
-        <button class="actionbtn-bar-btn" title="Refresh">
-            <span class="btn-icon">
-                <i class="fa-solid fa-arrow-rotate-right"></i>
-            </span>
-        </button>
-    </div>
-
-
+  <div class="actionbtn-bar-right">
+    <button
+      class="actionbtn-bar-btn btn-add"
+      title="Add"
+      (click)="openDialog('add')"
+    >
+      <span class="btn-icon">
+        <fa-icon [icon]="faPlusCircle"></fa-icon>
+      </span>
+    </button>
+    <button class="actionbtn-bar-btn btn-delete custom-tooltip" title="Delete">
+      <span class="btn-icon">
+        <fa-icon [icon]="faTrash"></fa-icon>
+      </span>
+    </button>
+    <button class="actionbtn-bar-btn" (click)="refresh()" title="Refresh">
+      <span class="btn-icon">
+        <i class="fa-solid fa-arrow-rotate-right"></i>
+      </span>
+    </button>
+  </div>
 </section>
 
 <GridComponent
-    [gridConfig]="gridConfig"
-    (clickRow)="selectedRow($event)"
+  [gridConfig]="gridConfig"
+  (clickRow)="selectedRow($event)"
+  (rowDblClick)="rowDblClick($event)"
 />

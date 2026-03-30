@@ -3,8 +3,16 @@ import {
   DIALOG_DATA,
   DialogRef,
 } from '../../../../shared/component/dailogbox/dialogboxRef';
-import { DialogData, DialogField } from '../../../../shared/component/dailogbox/dialogbox.model';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import {
+  DialogData,
+  DialogField,
+} from '../../../../shared/component/dailogbox/dialogbox.model';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { screenDialogFields } from './screen-dialogbox.field';
 import { mScreen } from '../../../../shared/model/screen.model';
 
@@ -14,7 +22,6 @@ import { mScreen } from '../../../../shared/model/screen.model';
   styleUrl: './screen-dialogbox.component.scss',
 })
 export class ScreenDialogboxComponent implements OnInit {
-
   formFields: DialogField[] = screenDialogFields;
   screen!: mScreen;
   formGroup!: FormGroup;
@@ -23,23 +30,30 @@ export class ScreenDialogboxComponent implements OnInit {
     private dialogRef: DialogRef,
     @Inject(DIALOG_DATA) public data: DialogData,
     private fb: FormBuilder,
-  ) 
-  {
-    this.formGroup = this.fb.group({})
+  ) {
+    this.formGroup = this.fb.group({});
     this.screen = this.data.data;
-  } 
+  }
 
   ngOnInit(): void {
-    this.formFields.forEach(field => {
-      this.formGroup.addControl(field.name, this.fb.control(this.screen[field.name as keyof mScreen] ?? '', field.required ? Validators.required : null))
+    this.formFields.forEach((field) => {
+      this.formGroup.addControl(
+        field.name,
+        this.fb.control(
+          this.screen[field.name as keyof mScreen] ?? '',
+          field.required ? Validators.required : null,
+        ),
+      );
     });
   }
 
-  cancel(): void {
-    this.dialogRef.close(); 
+  onSubmit(): void {
+    if(this.formGroup.valid && this.formGroup.dirty) {
+      this.dialogRef.close(this.formGroup.value);
+    }
   }
 
-  save(): void {
-    this.dialogRef.close(this.screen);
+  cancel(): void {
+    this.dialogRef.close();
   }
 }

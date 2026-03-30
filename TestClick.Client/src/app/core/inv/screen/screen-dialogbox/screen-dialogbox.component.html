@@ -23,14 +23,22 @@
       @switch (field.type) {
         @case ("select") {
           <label>{{ field.label }}</label>
-          <select>
-            <option *ngIf="!field.options || field.options.length === 0" value="">No options</option>
-            <option *ngFor="let opt of field.options" value="{{ opt.value }}"> {{ opt.label }}</option>
+          <select formControlName="{{ field.name }}">
+            <option
+              *ngIf="!field.options || field.options.length === 0"
+              value=""
+            >
+              No options
+            </option>
+            <option *ngFor="let opt of field.options" value="{{ opt.value }}">
+              {{ opt.label }}
+            </option>
           </select>
         }
         @case ("textarea") {
           <label>{{ field.label }}</label>
           <textarea
+            formControlName="{{ field.name }}"
             placeholder="Enter {{ field.label.toLowerCase() }}"
           ></textarea>
         }
@@ -38,9 +46,15 @@
           <label>{{ field.label }}</label>
           <input
             type="{{ field.type }}"
+            formControlName="{{ field.name }}"
             placeholder="Enter {{ field.label.toLowerCase() }}"
           />
-          <small *ngIf="formGroup.get(field.name)?.invalid && formGroup.get(field.name)?.touched">
+          <small
+            *ngIf="
+              formGroup.get(field.name)?.invalid &&
+              formGroup.get(field.name)?.touched
+            "
+          >
             {{ field.label }} is required.
           </small>
         }
@@ -50,7 +64,7 @@
       <button class="btn-cancel" (click)="cancel()">
         {{ data.cancelLabel || "Cancel" }}
       </button>
-      <button class="btn-save" (click)="save()">
+      <button class="btn-save" (click)="onSubmit()">
         {{ data.submitLable || "Submit" }}
       </button>
     </div>
