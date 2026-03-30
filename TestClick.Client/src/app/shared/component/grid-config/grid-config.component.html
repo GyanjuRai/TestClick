@@ -1,42 +1,37 @@
 <section class="grid">
-
-    <!-- GRID HEADER -->
-    <div class="grid-header" >
-        <div    class="grid-col" 
-                *ngFor="let col of gridConfig.columns" 
-        >
-            {{ col.columnName }}
-        </div>
-
+  <!-- GRID HEADER -->
+  <div class="grid-header">
+    <div class="grid-col" *ngFor="let col of gridConfig.columns">
+      {{ col.columnName }}
     </div>
+  </div>
 
-    <!-- ROWS -->
-    <div class="grid-row" *ngFor="let data of gridConfig.dataSource.data">
-        <div class="grid-col" (click)="selectRow(data)"  *ngFor="let col of columns">
-            <div class="screen-meta">
-                <span class="screen-name">{{ data[col] || '!' }}</span>
-            </div>
-        </div>
+  <!-- ROWS -->
+  <div class="grid-row" *ngFor="let data of gridConfig.dataSource.data">
+    <div class="grid-col" (click)="selectRow(data)" *ngFor="let col of columns">
+      <div class="grid-data-wrapper">
+        <span class="grid-data">{{ data[col] || "!" }}</span>
+      </div>
     </div>
+  </div>
 
-    <div class="gird-row" *ngIf="gridConfig.dataSource.data.length === 0">
-        <div class="grid-col">
-            <div class="grid-data-wrapper">
-                <span class="grid-data">No Data found</span>
-            </div>
-        </div>
+  <div class="gird-row" *ngIf="gridConfig.dataSource.data.length === 0">
+    <div class="grid-col">
+      <div class="grid-data-wrapper" style="text-align: center !important">
+        <span class="grid-data">No Data found</span>
+      </div>
     </div>
+  </div>
 
-    <!-- PAGINATION -->
-    <div class="grid-pagination">
-        <span class="pagination-info">Showing 1–6 of 124</span>
-        <div class="pagination-controls">
-            <button class="page-btn">Prev</button>
-            <button class="page-btn active">1</button>
-            <button class="page-btn">2</button>
-            <button class="page-btn">3</button>
-            <button class="page-btn">Next</button>
-        </div>
+  <!-- PAGINATION -->
+  <div class="grid-pagination">
+    <span class="pagination-info">Showing 1–6 of 124</span>
+    <div class="pagination-controls">
+      <button class="page-btn">Prev</button>
+      <button class="page-btn active">1</button>
+      <button class="page-btn">2</button>
+      <button class="page-btn">3</button>
+      <button class="page-btn">Next</button>
     </div>
-
+  </div>
 </section>

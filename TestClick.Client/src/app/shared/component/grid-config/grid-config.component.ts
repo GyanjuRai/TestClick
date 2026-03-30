@@ -19,7 +19,7 @@ export class GridConfigComponent implements OnChanges {
       this.columns = this.gridConfig.columns.map(c => c.name) ?? [];
     }
   }
-
+  
   /**
    * 
    * @param name That matches the model key

@@ -1,0 +1,85 @@
+@use '../../../../shared/scss/variable.scss' as vars;
+
+.form-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  z-index: 1;
+}
+
+.form-title {
+  margin: 0;
+  font-size: 22px;
+  text-align: center;
+  font-weight: 600;
+  color: vars.$primary;
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin: 8px 0;
+}
+
+.form-field label {
+  font-size: 14px;
+  color: vars.$text-muted;
+}
+
+.form-field input,
+.form-field select,
+.form-field textarea {
+  padding: 10px 12px;
+  border: 1px solid vars.$border;
+  border-radius: 8px;
+  font-size: 14px;
+  background: vars.$surface;
+  color: vars.$primary-dark;
+  outline: none;
+}
+
+.form-field textarea {
+  resize: vertical;
+  min-height: 60px;
+}
+
+.form-field input:focus,
+.form-field select:focus {
+  border-color: vars.$primary;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.btn-cancel {
+  padding: 8px 18px;
+  border-radius: 8px;
+  border: 1px solid vars.$border;
+  background: transparent;
+  color: vars.$text-muted;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.btn-save {
+  padding: 8px 18px;
+  border-radius: 8px;
+  border: none;
+  background: vars.$primary;
+  color: #fff;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.btn-cancel:hover {
+  background: vars.$border;
+}
+
+.btn-save:hover {
+  background: vars.$primary-dark;
+}

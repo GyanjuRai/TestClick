@@ -48,6 +48,10 @@ export interface DialogField {
      * Optional. Options for dropdown/select field type.
      */
     options?: DialogOption[];
+    /**
+     * Optional. Required or not.
+     */
+    required?: boolean;
 }
 
 /**

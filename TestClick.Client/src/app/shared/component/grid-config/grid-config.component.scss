@@ -3,29 +3,44 @@
 // ============================================
 // SCREEN GRID TABLE
 // ============================================
-
 .grid {
   padding: 20px 28px;
+  font-family: vars.$font-body;
 }
 
-// Both header and rows use the same grid template = columns align perfectly
 .grid-header,
 .grid-row {
   display: grid;
   grid-template-columns: 36px 2fr 1.6fr 100px 1.4fr 110px 130px 40px;
   align-items: center;
   gap: 12px;
+
+  & > .grid-col {
+    min-width: 0;
+  }
 }
 
 .grid-header {
-  padding: 8px 14px;
-  font-size: 11px;
+  padding: 10px 14px;
+  font-size: 14px;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.6px;
   color: vars.$text-light;
   border-bottom: 2px solid vars.$border;
   margin-bottom: 4px;
+  text-align: center;
+
+  .grid-col {
+    display: block;
+    white-space: nowrap;
+    overflow: visible;
+  }
+
+  .grid-col:nth-child(3) {
+    white-space: normal;
+    line-height: 1.3;
+  }
 }
 
 .grid-row {
@@ -39,27 +54,31 @@
     border-color: vars.$border;
   }
 
-  // Alternating row color — super light
   &:nth-child(even) { background: #fafafa; }
   &:nth-child(even):hover { background: vars.$surface; }
 
   .grid-col {
-    @include vars.flex-center;
-    gap: 10px;
+    display: block;
+    min-width: 0;
+  }
+
+  .grid-data-wrapper {
+    min-width: 10px;
   }
 
   .grid-data {
     display: block;
     font-weight: 500;
     font-size: 13.5px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
-
 }
 
 // ============================================
 // PAGINATION
 // ============================================
-
 .grid-pagination {
   @include vars.flex-between;
   padding: 16px 14px 4px;

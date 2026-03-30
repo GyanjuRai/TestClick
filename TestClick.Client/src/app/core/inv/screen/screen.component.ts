@@ -6,7 +6,10 @@ import { gridResponse, responseModel } from '../../../shared/model/response.mode
 import { responseStatuEnum } from '../../../shared/model/enum';
 import { Subject, takeUntil } from 'rxjs';
 import { gridConfig } from '../../../shared/component/grid-config/grid-config.model';
+import { DialogboxService } from '../../../shared/component/dailogbox/dialogbox.service';
+import { ScreenDialogboxComponent } from './screen-dialogbox/screen-dialogbox.component';
 import { screenColumns } from './screen.column';
+import { DialogData } from '../../../shared/component/dailogbox/dialogbox.model';
 
 @Component({
   selector: 'ScreenComponent',
@@ -24,8 +27,12 @@ export class ScreenComponent implements OnInit, OnDestroy {
     }
   }
   screens: mScreen[] = [];
+  selectedScreen: mScreen = {} as mScreen;
 
-  constructor(private _ss: ScreenService) 
+  constructor(
+    private _ss: ScreenService,
+    private dialog: DialogboxService
+  ) 
   {
     this.__unSubscribeAll = new Subject();
   }
@@ -49,6 +56,25 @@ export class ScreenComponent implements OnInit, OnDestroy {
 
         this.gridConfig = {...this.gridConfig}; // Refresh the grid. Implemented ngOnChanges
       }
+    });
+  }
+
+  openDialog(type: string) {
+
+    const dialogData : DialogData = {
+      title: type === 'add' ? 'Add Screen' : 'Edit Screen',
+      data: this.selectedScreen,
+      submitLable: type === 'add' ? 'Add' : 'Save',
+      cancelLabel: 'Cancel'
+    } 
+
+    const dialogRef = this.dialog.open(ScreenDialogboxComponent, {
+      disableClose: false,
+      data: dialogData
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('Dialog closed with result:', result);
     });
   }
 

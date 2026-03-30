@@ -1,0 +1,58 @@
+<!-- <div class="form-wrapper">
+      <h2 class="form-title">{{ data.title || 'form'}}</h2>
+
+      <div class="form-field">
+        <label>Name</label>
+        <input type="text" placeholder="Enter name" />
+      </div>
+
+      <div class="form-field">
+        <label>Status</label>
+      </div>
+
+      <div class="form-actions">
+        <button class="btn-cancel" (click)="cancel()">Cancel</button>
+        <button class="btn-save"   (click)="save()">Save</button>
+      </div>
+</div> -->
+
+<div class="form-wrapper">
+  <form [formGroup]="formGroup">
+    <h2 class="form-title">{{ data.title || "form" }}</h2>
+    <div class="form-field" *ngFor="let field of formFields">
+      @switch (field.type) {
+        @case ("select") {
+          <label>{{ field.label }}</label>
+          <select>
+            <option *ngIf="!field.options || field.options.length === 0" value="">No options</option>
+            <option *ngFor="let opt of field.options" value="{{ opt.value }}"> {{ opt.label }}</option>
+          </select>
+        }
+        @case ("textarea") {
+          <label>{{ field.label }}</label>
+          <textarea
+            placeholder="Enter {{ field.label.toLowerCase() }}"
+          ></textarea>
+        }
+        @default {
+          <label>{{ field.label }}</label>
+          <input
+            type="{{ field.type }}"
+            placeholder="Enter {{ field.label.toLowerCase() }}"
+          />
+          <small *ngIf="formGroup.get(field.name)?.invalid && formGroup.get(field.name)?.touched">
+            {{ field.label }} is required.
+          </small>
+        }
+      }
+    </div>
+    <div class="form-actions">
+      <button class="btn-cancel" (click)="cancel()">
+        {{ data.cancelLabel || "Cancel" }}
+      </button>
+      <button class="btn-save" (click)="save()">
+        {{ data.submitLable || "Submit" }}
+      </button>
+    </div>
+  </form>
+</div>
