@@ -6,6 +6,7 @@ import { GridConfigModule } from '../../shared/component/grid-config/grid-config
 import { ScreenDialogboxComponent } from './screen/screen-dialogbox/screen-dialogbox.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { ScreenConfirmationboxComponent } from './screen/screen-confirmationbox/screen-confirmationbox.component';
 
 const invRoutes: Route[] = [
   {
@@ -22,7 +23,8 @@ const invRoutes: Route[] = [
 @NgModule({
   declarations: [
     ScreenComponent,
-    ScreenDialogboxComponent
+    ScreenDialogboxComponent,
+    ScreenConfirmationboxComponent
   ],
   imports: [
     CommonModule,

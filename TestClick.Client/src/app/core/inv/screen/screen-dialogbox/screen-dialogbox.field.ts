@@ -20,6 +20,12 @@ export const screenDialogFields: DialogField[] = [
     required: true,
   },
   {
+    label: 'City',
+    name: 'city',
+    type: 'text',
+    required: true,
+  },
+  {
     label: 'Placement Type',
     name: 'placementType',
     type: 'select',
@@ -32,6 +38,12 @@ export const screenDialogFields: DialogField[] = [
     label: 'Placement',
     name: 'placement',
     type: 'text',
+    required: true,
+  },
+  {
+    label: 'basePrice',
+    name: 'basePrice',
+    type: 'number',
     required: true,
   },
   {

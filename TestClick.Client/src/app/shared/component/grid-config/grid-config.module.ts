@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { GridConfigComponent } from './grid-config.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 
 
@@ -9,10 +10,11 @@ import { GridConfigComponent } from './grid-config.component';
     GridConfigComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    FontAwesomeModule
   ],
   exports: [
-    GridConfigComponent
+    GridConfigComponent,
   ]
 })
 export class GridConfigModule { }

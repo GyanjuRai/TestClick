@@ -13,7 +13,7 @@ namespace TestClick.DataAccess
 
         public DataAccessService(IConfiguration configuration)
         {
-            _connectionString = configuration.GetSection("DbSetting")["ConnectionString:Prod"];
+            _connectionString = configuration.GetSection("DbSetting")["ConnectionString:Dev"];
         }
 
         public async Task<string> ActionProcedure(string storedProcedure, string json)

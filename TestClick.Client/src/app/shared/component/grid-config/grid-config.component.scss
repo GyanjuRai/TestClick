@@ -1,4 +1,4 @@
-@use '../../scss/variable.scss' as vars;
+@use "../../scss/variable.scss" as vars;
 
 // ============================================
 // SCREEN GRID TABLE
@@ -47,15 +47,22 @@
   padding: 12px 14px;
   border-radius: 10px;
   border: 1px solid transparent;
-  transition: border-color 0.15s, background 0.15s;
+  transition:
+    border-color 0.15s,
+    background 0.15s;
 
   &:hover {
     background: vars.$surface;
     border-color: vars.$border;
+    cursor: pointer;
   }
 
-  &:nth-child(even) { background: #fafafa; }
-  &:nth-child(even):hover { background: vars.$surface; }
+  // &:nth-child(even) {
+  //   background: #fafafa;
+  // }
+  // &:nth-child(even):hover {
+  //   background: vars.$surface;
+  // }
 
   .grid-col {
     display: block;
@@ -107,7 +114,10 @@
   border: 1px solid vars.$border;
   transition: all 0.15s;
 
-  &:hover { background: vars.$surface; color: vars.$text-main; }
+  &:hover {
+    background: vars.$surface;
+    color: vars.$text-main;
+  }
 
   &.active {
     background: vars.$primary;
@@ -116,3 +126,46 @@
     font-weight: 600;
   }
 }
+
+// ============================================
+// Row Btn
+// ============================================
+
+.btn-container {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+}
+
+.btn-delete {
+  color: #b91c1c;
+  border: none;
+  background: inherit;
+
+  &:hover {
+    color: #fca5a5;
+    cursor: pointer;
+  }
+
+  btn-icon {
+    font-size: 20px;
+    line-height: 1;
+  }
+}
+
+.btn-update {
+  color: #cd7f0b;
+  border: none;
+  background: inherit;
+
+  &:hover {
+    color: #fca5a5;
+    cursor: pointer;
+  }
+
+  btn-icon {
+    font-size: 10px;
+    line-height: 1;
+  }
+}
+

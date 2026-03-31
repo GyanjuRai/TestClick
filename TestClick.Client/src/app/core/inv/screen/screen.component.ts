@@ -1,7 +1,13 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ScreenService } from '../../service/screen.service';
+import { ScreenService } from '../service/screen.service';
 import { selParamModel } from '../../../shared/model/param.model';
-import { mScreen, mScreenFilter } from '../../../shared/model/screen.model';
+import {
+  mScreen,
+  mScreenDel,
+  mScreenFilter,
+  mScreenIns,
+  mScreenUpd,
+} from '../../../shared/model/screen.model';
 import {
   gridResponse,
   responseModel,
@@ -13,11 +19,11 @@ import { DialogboxService } from '../../../shared/component/dailogbox/dialogbox.
 import { ScreenDialogboxComponent } from './screen-dialogbox/screen-dialogbox.component';
 import { screenColumns } from './screen.column';
 import { DialogData } from '../../../shared/component/dailogbox/dialogbox.model';
+import { faTrash, faPlusCircle } from '@fortawesome/free-solid-svg-icons';
 import {
-  faTrash,
-  faPlusCircle,
-  IconDefinition,
-} from '@fortawesome/free-solid-svg-icons';
+  ConfirmationData,
+  ScreenConfirmationboxComponent,
+} from './screen-confirmationbox/screen-confirmationbox.component';
 
 @Component({
   selector: 'ScreenComponent',
@@ -26,7 +32,9 @@ import {
 })
 export class ScreenComponent implements OnInit, OnDestroy {
   private __unSubscribeAll: Subject<any>;
-  gridConfig: gridConfig = {
+  private isDialogOpen: boolean = false;
+  private isConfirmationBoxOpen: boolean = false;
+  screenConfig: gridConfig = {
     columns: screenColumns,
     dataSource: {
       data: [],
@@ -52,7 +60,7 @@ export class ScreenComponent implements OnInit, OnDestroy {
 
   getScreen() {
     let param: selParamModel<mScreenFilter> = {
-      offset: 0,
+      offset: 45,
       pageSize: 10,
     };
 
@@ -61,14 +69,19 @@ export class ScreenComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.__unSubscribeAll))
       .subscribe((response: responseModel<gridResponse<mScreen>>) => {
         if (response.type === responseStatuEnum.success && response.data) {
-          this.gridConfig.dataSource.data = response.data.data ?? [];
+          this.screenConfig.dataSource.data = response.data.data ?? [];
 
-          this.gridConfig = { ...this.gridConfig }; // Refresh the grid. Implemented ngOnChanges
+          this.screenConfig = { ...this.screenConfig }; // Refresh the grid.
+        } else {
+          this.screenConfig = { ...this.screenConfig }; // Refresh the grid.
         }
       });
   }
 
   openDialog(type: string) {
+    if (this.isDialogOpen) return;
+    this.isDialogOpen = true;
+
     const dialogData: DialogData = {
       title: type === 'add' ? 'Add Screen' : 'Edit Screen',
       data: this.selectedScreen,
@@ -81,8 +94,99 @@ export class ScreenComponent implements OnInit, OnDestroy {
       data: dialogData,
     });
 
+    if (type === 'add') {
+      dialogRef.afterClosed().subscribe((result) => {
+        if (result) {
+          const param = {
+            tenantId: 10, // Replace with actual tenant ID from session or auth service
+            ...result,
+            createdBy: 10, // Replace with actual user ID from session or auth service
+          } as mScreenIns;
+
+          this._ss
+            .postScreen(param)
+            .pipe(takeUntil(this.__unSubscribeAll))
+            .subscribe((response: responseModel<mScreen[]>) => {
+              if (response.type === responseStatuEnum.success) {
+                this.screenConfig.dataSource.data = [
+                  ...(response.data ?? []),
+                  ...(this.screenConfig.dataSource.data ?? []),
+                ];
+              }
+            });
+        }
+        this.selectedScreen = {} as mScreen;
+        this.isDialogOpen = false;
+      });
+    } else {
+      dialogRef.afterClosed().subscribe((result) => {
+        if (result) {
+          const param = {
+            id: this.selectedScreen.id,
+            ...result,
+            updatedBy: 10, // Replace with actual user ID from session or auth service
+          } as mScreenUpd;
+
+          this._ss
+            .putScreen(param)
+            .pipe(takeUntil(this.__unSubscribeAll))
+            .subscribe((response: responseModel<mScreen[]>) => {
+              if (
+                response.type === responseStatuEnum.success &&
+                response.data
+              ) {
+                const updatedScreen = response.data[0];
+                this.screenConfig.dataSource.data =
+                  this.screenConfig.dataSource.data?.map((screen) =>
+                    screen.id === updatedScreen.id ? updatedScreen : screen,
+                  ) ?? [];
+
+                this.screenConfig = { ...this.screenConfig }; // Refresh the grid.
+              }
+            });
+        }
+        this.selectedScreen = {} as mScreen;
+        this.isDialogOpen = false;
+      });
+    }
+  }
+
+  openConfirmationBox(id: any) {
+    if (this.isConfirmationBoxOpen) return;
+    this.isConfirmationBoxOpen = true;
+    const dialogData = {
+      title: 'Delete Confirmation',
+      message: 'Are you sure you want to delete this screen?',
+      confirmLabel: 'Delete',
+      cancelLabel: 'Cancel',
+    } as ConfirmationData;
+
+    const dialogRef = this.dialog.open(ScreenConfirmationboxComponent, {
+      disableClose: true,
+      data: dialogData,
+    });
+
     dialogRef.afterClosed().subscribe((result) => {
-      this.selectedScreen = {} as mScreen;
+      if (result) {
+        const param = {
+          id: id,
+          updatedBy: 10, // Replace with actual user ID from session or auth service
+        } as mScreenDel;
+
+        this._ss
+          .deleteScreen(param)
+          .pipe(takeUntil(this.__unSubscribeAll))
+          .subscribe((response: responseModel<mScreen>) => {
+            if (response.type === responseStatuEnum.success && response.data) {
+              this.screenConfig.dataSource.data =
+                this.screenConfig.dataSource.data?.filter(
+                  (screen) => screen.id !== response.data.id,
+                ) ?? [];
+            }
+          });
+        this.isConfirmationBoxOpen = false;
+      }
+      this.isConfirmationBoxOpen = false;
     });
   }
 
@@ -95,8 +199,13 @@ export class ScreenComponent implements OnInit, OnDestroy {
     this.openDialog('edit');
   }
 
-  selectedRow(row: any) {
-    this.selectedRow = this.rowDblClick;
+  rowDltBtnClick(id: any) {
+    this.openConfirmationBox(id);
+  }
+
+  rowUpdBtnClick(row: any) {
+    this.selectedScreen = row;
+    this.openDialog('edit');
   }
 
   ngOnDestroy(): void {

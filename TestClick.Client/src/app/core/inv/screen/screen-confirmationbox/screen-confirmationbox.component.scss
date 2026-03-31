@@ -1,0 +1,77 @@
+@use "../../../../shared/scss/variable.scss" as vars;
+
+.form-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  min-width: 320px;
+  max-width: 400px;
+  align-items: center;
+  text-align: center;
+}
+
+.confirm-icon {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: rgba(vars.$offline, 0.1);
+  color: vars.$offline;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 4px;
+}
+
+.confirm-text {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form-title {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 600;
+  color: vars.$primary;
+}
+
+.confirm-message {
+  margin: 0;
+  font-size: 14px;
+  color: vars.$text-muted;
+  line-height: 1.6;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 8px;
+  width: 100%;
+}
+
+.btn-cancel {
+  padding: 8px 24px;
+  border-radius: 8px;
+  border: 1px solid vars.$border;
+  background: transparent;
+  color: vars.$text-muted;
+  cursor: pointer;
+  font-size: 14px;
+  &:hover {
+    background: vars.$border;
+  }
+}
+
+.btn-delete {
+  padding: 8px 24px;
+  border-radius: 8px;
+  border: none;
+  background: vars.$offline;
+  color: #fff;
+  cursor: pointer;
+  font-size: 14px;
+  &:hover {
+    filter: brightness(0.88);
+  }
+}

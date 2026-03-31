@@ -1,0 +1,21 @@
+<div class="form-wrapper">
+
+      <div class="confirm-icon">
+        <fa-icon [icon]="faTrash" size="2x"></fa-icon>
+      </div>
+
+      <div class="confirm-text">
+        <h2 class="form-title">{{ data.title || 'Delete?' }}</h2>
+        <p class="confirm-message">{{ data.message || 'Are you sure you want to delete this? This action cannot be undone.' }}</p>
+      </div>
+
+      <div class="form-actions">
+        <button class="btn-cancel" (click)="cancel()">
+          {{ data.cancelLabel || 'Cancel' }}
+        </button>
+        <button class="btn-delete" (click)="confirm()">
+          {{ data.confirmLabel || 'Delete' }}
+        </button>
+      </div>
+
+    </div>

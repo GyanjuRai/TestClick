@@ -16,11 +16,7 @@
         <fa-icon [icon]="faPlusCircle"></fa-icon>
       </span>
     </button>
-    <button class="actionbtn-bar-btn btn-delete custom-tooltip" title="Delete">
-      <span class="btn-icon">
-        <fa-icon [icon]="faTrash"></fa-icon>
-      </span>
-    </button>
+   
     <button class="actionbtn-bar-btn" (click)="refresh()" title="Refresh">
       <span class="btn-icon">
         <i class="fa-solid fa-arrow-rotate-right"></i>
@@ -30,7 +26,8 @@
 </section>
 
 <GridComponent
-  [gridConfig]="gridConfig"
-  (clickRow)="selectedRow($event)"
+  [gridConfig]="screenConfig"
   (rowDblClick)="rowDblClick($event)"
+  (rowDltBtnClick)="rowDltBtnClick($event)"
+  (rowUpdBtnClick)="rowUpdBtnClick($event)"
 />

@@ -17,7 +17,7 @@
 </div> -->
 
 <div class="form-wrapper">
-  <form [formGroup]="formGroup">
+  <form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
     <h2 class="form-title">{{ data.title || "form" }}</h2>
     <div class="form-field" *ngFor="let field of formFields">
       @switch (field.type) {
@@ -61,10 +61,10 @@
       }
     </div>
     <div class="form-actions">
-      <button class="btn-cancel" (click)="cancel()">
+      <button type="button" class="btn-cancel" (click)="cancel()">
         {{ data.cancelLabel || "Cancel" }}
       </button>
-      <button class="btn-save" (click)="onSubmit()">
+      <button type="submit" class="btn-save">
         {{ data.submitLable || "Submit" }}
       </button>
     </div>
