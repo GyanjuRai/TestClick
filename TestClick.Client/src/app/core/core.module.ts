@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { coreRoutes } from './core.routing';
-import { GridConfigModule } from "../shared/component/grid-config/grid-config.module";
 
 @NgModule({
   declarations: [
@@ -10,8 +9,7 @@ import { GridConfigModule } from "../shared/component/grid-config/grid-config.mo
   ],
   imports: [
     CommonModule,
-    RouterModule.forChild(coreRoutes),
-    GridConfigModule,
+    RouterModule.forChild(coreRoutes)
 ]
 })
 export class CoreModule { }

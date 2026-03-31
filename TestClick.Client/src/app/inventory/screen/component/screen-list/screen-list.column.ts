@@ -1,4 +1,4 @@
-import { gridColumn } from "../../../shared/component/grid-config/grid-config.model";
+import { gridColumn } from "../../../../shared/model/grid-config.model";
 
 export const screenColumns: gridColumn[] = [
     {

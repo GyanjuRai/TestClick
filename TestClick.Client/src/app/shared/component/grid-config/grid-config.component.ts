@@ -6,7 +6,7 @@ import {
   Output,
   SimpleChanges,
 } from '@angular/core';
-import { gridConfig } from './grid-config.model';
+import { gridConfig } from '../../model/grid-config.model';
 import { faTrash, faPen } from '@fortawesome/free-solid-svg-icons';
 
 @Component({

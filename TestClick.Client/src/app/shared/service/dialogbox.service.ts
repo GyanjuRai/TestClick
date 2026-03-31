@@ -1,10 +1,10 @@
 import { ApplicationRef, ComponentRef, createComponent, EnvironmentInjector, Inject, Injectable, Injector, Type } from "@angular/core";
-import { DIALOG_CONFIG, DIALOG_DATA, DialogRef } from "./dialogboxRef";
-import { DialogConfig } from "./dialogbox.model";
 import { Overlay } from '@angular/cdk/overlay';
-import { DialogboxComponent } from "./dialogbox.component";
 import { filter } from "rxjs";
 import { ComponentPortal } from "@angular/cdk/portal";
+import { DialogConfig } from "../model/dialogbox.model";
+import { DIALOG_CONFIG, DIALOG_DATA, DialogRef } from "../component/dailogbox/dialogboxRef";
+import { DialogboxComponent } from "../component/dailogbox/dialogbox.component";
 
 @Injectable({
     providedIn: 'root'

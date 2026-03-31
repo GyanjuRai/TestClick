@@ -1,6 +1,6 @@
 import { InjectionToken } from "@angular/core";
 import { Observable, Subject } from "rxjs";
-import { DialogConfig } from "./dialogbox.model";
+import { DialogConfig } from "../../model/dialogbox.model";
 import { OverlayRef } from "@angular/cdk/overlay";
 
 /** unique key for injecting data into dialog. */

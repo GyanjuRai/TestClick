@@ -12,7 +12,7 @@ const routes: Routes = [
   {
     path: 'inv',
     // loadChildren: () => ScreenModule --Eager loading
-    loadChildren: () => import('./core/core.module').then(m => m.CoreModule)
+    loadChildren: () => import('./inventory/inventory.module').then(m => m.InventoryModule)
   },
   {
     path: '**',

@@ -1,36 +1,36 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ScreenService } from '../service/screen.service';
-import { selParamModel } from '../../../shared/model/param.model';
+import { ScreenService } from '../../service/screen.service';
+import { selParamModel } from '../../../../shared/model/param.model';
 import {
   mScreen,
   mScreenDel,
   mScreenFilter,
   mScreenIns,
   mScreenUpd,
-} from '../../../shared/model/screen.model';
+} from '../../model/screen.model';
 import {
   gridResponse,
   responseModel,
-} from '../../../shared/model/response.model';
-import { responseStatuEnum } from '../../../shared/model/enum';
+} from '../../../../shared/model/response.model';
+import { responseStatuEnum } from '../../../../shared/model/enum';
 import { Subject, takeUntil } from 'rxjs';
-import { gridConfig } from '../../../shared/component/grid-config/grid-config.model';
-import { DialogboxService } from '../../../shared/component/dailogbox/dialogbox.service';
-import { ScreenDialogboxComponent } from './screen-dialogbox/screen-dialogbox.component';
-import { screenColumns } from './screen.column';
-import { DialogData } from '../../../shared/component/dailogbox/dialogbox.model';
+import { gridConfig } from '../../../../shared/model/grid-config.model';
+import { ScreenDialogboxComponent } from '../screen-dialogbox/screen-dialogbox.component';
+import { screenColumns } from './screen-list.column';
+import { DialogData } from '../../../../shared/model/dialogbox.model';
 import { faTrash, faPlusCircle } from '@fortawesome/free-solid-svg-icons';
 import {
   ConfirmationData,
   ScreenConfirmationboxComponent,
-} from './screen-confirmationbox/screen-confirmationbox.component';
+} from '../screen-confirmationbox/screen-confirmationbox.component';
+import { DialogboxService } from '../../../../shared/service/dialogbox.service';
 
 @Component({
   selector: 'ScreenComponent',
-  templateUrl: './screen.component.html',
-  styleUrl: './screen.component.scss',
+  templateUrl: './screen-list.component.html',
+  styleUrl: './screen-list.component.scss',
 })
-export class ScreenComponent implements OnInit, OnDestroy {
+export class ScreenListComponent implements OnInit, OnDestroy {
   private __unSubscribeAll: Subject<any>;
   private isDialogOpen: boolean = false;
   private isConfirmationBoxOpen: boolean = false;

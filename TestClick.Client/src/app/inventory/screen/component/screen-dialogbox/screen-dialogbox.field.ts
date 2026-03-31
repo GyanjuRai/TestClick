@@ -1,4 +1,4 @@
-import { DialogField } from '../../../../shared/component/dailogbox/dialogbox.model';
+import { DialogField } from '../../../../shared/model/dialogbox.model';
 
 export const screenDialogFields: DialogField[] = [
   {

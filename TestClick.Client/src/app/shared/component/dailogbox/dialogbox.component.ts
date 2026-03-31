@@ -4,7 +4,7 @@ import {
   ViewContainerRef 
 } from '@angular/core';
 import { DIALOG_CONFIG } from './dialogboxRef';
-import { DialogConfig } from './dialogbox.model';
+import { DialogConfig } from '../../model/dialogbox.model';
 
 @Component({
   template: `

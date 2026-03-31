@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { WebApiService } from "../../../shared/service/web-api.service";
 import { Observable } from "rxjs";
 import { gridResponse, responseModel } from "../../../shared/model/response.model";
-import { mScreen, mScreenDel, mScreenFilter, mScreenIns, mScreenUpd } from "../../../shared/model/screen.model";
+import { mScreen, mScreenDel, mScreenFilter, mScreenIns, mScreenUpd } from "../model/screen.model";
 import { selParamModel } from "../../../shared/model/param.model";
 
 @Injectable({

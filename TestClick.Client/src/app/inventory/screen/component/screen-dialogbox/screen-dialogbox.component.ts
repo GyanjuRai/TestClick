@@ -6,7 +6,7 @@ import {
 import {
   DialogData,
   DialogField,
-} from '../../../../shared/component/dailogbox/dialogbox.model';
+} from '../../../../shared/model/dialogbox.model';
 import {
   FormBuilder,
   FormControl,
@@ -14,7 +14,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { screenDialogFields } from './screen-dialogbox.field';
-import { mScreen } from '../../../../shared/model/screen.model';
+import { mScreen } from '../../model/screen.model';
 
 @Component({
   selector: 'Screen-DialogboxComponent',
