@@ -40,6 +40,17 @@ export class ScreenListComponent implements OnInit, OnDestroy {
       data: [],
       totalRows: 0,
     },
+    options: {
+      filter: {
+        statusIdList: [],
+        placementTypeIdList: [],
+        typeIdList: []
+      },
+      offset: 0,
+      pageSize: 10,
+      sortBy: 'screenName',
+      sortOrder: 'asc'
+    }
   };
   screens: mScreen[] = [];
   selectedScreen: mScreen = {} as mScreen;
@@ -59,17 +70,14 @@ export class ScreenListComponent implements OnInit, OnDestroy {
   }
 
   getScreen() {
-    let param: selParamModel<mScreenFilter> = {
-      offset: 45,
-      pageSize: 10,
-    };
-
+    
     this._ss
-      .getScreen(param)
+      .getScreen(this.screenConfig.options)
       .pipe(takeUntil(this.__unSubscribeAll))
       .subscribe((response: responseModel<gridResponse<mScreen>>) => {
         if (response.type === responseStatuEnum.success && response.data) {
           this.screenConfig.dataSource.data = response.data.data ?? [];
+          this.screenConfig.dataSource.totalRows = response.data.totalCount ?? 0;
 
           this.screenConfig = { ...this.screenConfig }; // Refresh the grid.
         } else {
@@ -188,6 +196,11 @@ export class ScreenListComponent implements OnInit, OnDestroy {
       }
       this.isConfirmationBoxOpen = false;
     });
+  }
+
+  pageChange(offset: number) {
+    this.screenConfig.options.offset = offset;
+    this.getScreen();
   }
 
   refresh() {

@@ -24,5 +24,12 @@ export interface gridConfig {
     dataSource: {
         data: any[],
         totalRows: number
+    },
+    options: {
+        filter?: any;
+        offset?: number;
+        pageSize?: number;
+        sortBy?: string;
+        sortOrder?: string;
     }
 }

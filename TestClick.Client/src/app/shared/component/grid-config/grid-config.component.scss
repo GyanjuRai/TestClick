@@ -114,9 +114,10 @@
   border: 1px solid vars.$border;
   transition: all 0.15s;
 
-  &:hover {
+  &:not(:disabled):hover {
     background: vars.$surface;
     color: vars.$text-main;
+    cursor: pointer;
   }
 
   &.active {
@@ -124,6 +125,12 @@
     color: vars.$white;
     border-color: vars.$primary;
     font-weight: 600;
+    cursor: default;
+  }
+
+  &.disabled {
+    background: vars.$white;
+    cursor: default;
   }
 }
 
