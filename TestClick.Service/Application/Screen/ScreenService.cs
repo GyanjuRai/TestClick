@@ -20,7 +20,7 @@ namespace TestClick.Service.Application.Screen
         {
             try
             {
-                var result = await _db.RetrievalProcedure("Inv.SpScreenSel", JsonConvert.SerializeObject(param));
+                var result = await _db.RetrievalProcedure("inv.SpScreenSel", JsonConvert.SerializeObject(param));
                 return JsonConvert.DeserializeObject<GridResponse<MScreen>>(result);
             }
             catch
@@ -47,7 +47,7 @@ namespace TestClick.Service.Application.Screen
         {
             try
             {
-                var result = await _db.ActionProcedure("Inv.SpScreenUpd", JsonConvert.SerializeObject(param));
+                var result = await _db.ActionProcedure("inv.SpScreenUpd", JsonConvert.SerializeObject(param));
                 return JsonConvert.DeserializeObject<List<MScreen?>>(result);
             }
             catch
@@ -60,7 +60,7 @@ namespace TestClick.Service.Application.Screen
         {
             try
             {
-                var result = await _db.ActionProcedure("Inv.SpScreenDel", JsonConvert.SerializeObject(param));
+                var result = await _db.ActionProcedure("inv.SpScreenDel", JsonConvert.SerializeObject(param));
                 return JsonConvert.DeserializeObject<MScreen?>(result);
             }
             catch
@@ -73,7 +73,7 @@ namespace TestClick.Service.Application.Screen
         {
             try
             {
-                var result = await _db.ActionProcedure("Inv.SpScreenTsk", JsonConvert.SerializeObject(param));
+                var result = await _db.ActionProcedure("inv.SpScreenTsk", JsonConvert.SerializeObject(param));
                 return JsonConvert.DeserializeObject<List<MScreen?>>(result);
             }
             catch

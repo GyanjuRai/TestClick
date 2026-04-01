@@ -6,7 +6,7 @@ import {
 } from '../../../../shared/component/dailogbox/dialogboxRef';
 
 @Component({
-  selector: 'app-screen-confirmationbox',
+  selector: 'screenConfirmationbox',
   templateUrl: './screen-confirmationbox.component.html',
   styleUrl: './screen-confirmationbox.component.scss',
 })

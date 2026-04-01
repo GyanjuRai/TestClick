@@ -59,7 +59,7 @@ export class ScreenListComponent implements OnInit, OnDestroy {
   faTrash = faTrash as any;
 
   constructor(
-    private _ss: ScreenService,
+    private _screenService: ScreenService,
     private dialog: DialogboxService,
   ) {
     this.__unSubscribeAll = new Subject();
@@ -70,9 +70,9 @@ export class ScreenListComponent implements OnInit, OnDestroy {
   }
 
   getScreen() {
-    
-    this._ss
-      .getScreen(this.screenConfig.options)
+    const param = this.screenConfig.options;
+    this._screenService
+      .getScreen(param)
       .pipe(takeUntil(this.__unSubscribeAll))
       .subscribe((response: responseModel<gridResponse<mScreen>>) => {
         if (response.type === responseStatuEnum.success && response.data) {
@@ -111,8 +111,8 @@ export class ScreenListComponent implements OnInit, OnDestroy {
             createdBy: 10, // Replace with actual user ID from session or auth service
           } as mScreenIns;
 
-          this._ss
-            .postScreen(param)
+          this._screenService
+            .insScreen(param)
             .pipe(takeUntil(this.__unSubscribeAll))
             .subscribe((response: responseModel<mScreen[]>) => {
               if (response.type === responseStatuEnum.success) {
@@ -135,8 +135,8 @@ export class ScreenListComponent implements OnInit, OnDestroy {
             updatedBy: 10, // Replace with actual user ID from session or auth service
           } as mScreenUpd;
 
-          this._ss
-            .putScreen(param)
+          this._screenService
+            .updScreen(param)
             .pipe(takeUntil(this.__unSubscribeAll))
             .subscribe((response: responseModel<mScreen[]>) => {
               if (
@@ -181,7 +181,7 @@ export class ScreenListComponent implements OnInit, OnDestroy {
           updatedBy: 10, // Replace with actual user ID from session or auth service
         } as mScreenDel;
 
-        this._ss
+        this._screenService
           .deleteScreen(param)
           .pipe(takeUntil(this.__unSubscribeAll))
           .subscribe((response: responseModel<mScreen>) => {

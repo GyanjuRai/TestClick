@@ -95,10 +95,16 @@ export class GridConfigComponent implements OnChanges {
     this.pageChange.emit(this.offSet);
   }
 
+  /**
+   * Shows the first row number being displayed on the current grid. 
+   */
   get showingFrom(): number {
     return (this.currentPage - 1) * this.pageSize + 1;
   }
 
+  /**
+   * Shows the last row number being displayed on the current grid
+   */
   get showingTo(): number {
     return Math.min(this.currentPage * this.pageSize, this.totalRows);
   }
