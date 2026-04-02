@@ -144,6 +144,9 @@ export class ScreenListComponent implements OnInit, OnDestroy {
                 response.data
               ) {
                 const updatedScreen = response.data[0];
+                // let index = this.screenConfig.dataSource.data.findIndex(s => s.id === updatedScreen.id);
+                // this.screenConfig.dataSource.data[index] = updatedScreen;
+
                 this.screenConfig.dataSource.data =
                   this.screenConfig.dataSource.data?.map((screen) =>
                     screen.id === updatedScreen.id ? updatedScreen : screen,

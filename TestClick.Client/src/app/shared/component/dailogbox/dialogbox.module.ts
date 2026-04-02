@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { OverlayModule } from '@angular/cdk/overlay';
 import { DialogboxComponent } from './dialogbox.component';
+import { ButtonModule } from 'primeng/button';
 
 @NgModule({
   declarations: [
