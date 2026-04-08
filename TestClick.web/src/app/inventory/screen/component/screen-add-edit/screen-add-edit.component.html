@@ -1,0 +1,94 @@
+<p-dialog
+  [(visible)]="isVisible"
+  [header]="dialogHeader"
+  [modal]="true"
+  [draggable]="false"
+  [resizable]="false"
+  styleClass="w-30rem"
+  (onHide)="onClose()">
+
+  <ng-template pTemplate="content">
+    <div class="flex flex-column gap-3">
+
+      <div class="flex flex-column gap-1">
+        <label class="font-medium">Screen Name</label>
+        <input
+          pInputText
+          [(ngModel)]="screenData!.screenName"
+          [disabled]="isViewMode"
+          placeholder="Enter screen name"/>
+      </div>
+
+      <div class="flex flex-column gap-1">
+        <label class="font-medium">Specification</label>
+        <input
+          pInputText
+          [(ngModel)]="screenData!.specification"
+          [disabled]="isViewMode"
+          placeholder="Enter specification"/>
+      </div>
+
+      <div class="flex gap-3">
+        <div class="flex flex-column gap-1 flex-1">
+          <label class="font-medium">Country</label>
+          <input
+            pInputText
+            [(ngModel)]="screenData!.country"
+            [disabled]="isViewMode"
+            placeholder="Country"/>
+        </div>
+        <div class="flex flex-column gap-1 flex-1">
+          <label class="font-medium">City</label>
+          <input
+            pInputText
+            [(ngModel)]="screenData!.city"
+            [disabled]="isViewMode"
+            placeholder="City"/>
+        </div>
+      </div>
+
+      <div class="flex flex-column gap-1">
+        <label class="font-medium">Placement</label>
+        <input
+          pInputText
+          [(ngModel)]="screenData!.placement"
+          [disabled]="isViewMode"
+          placeholder="Placement"/>
+      </div>
+
+      <div class="flex gap-3">
+        <div class="flex flex-column gap-1 flex-1">
+          <label class="font-medium">Avg. Viewers</label>
+          <p-inputNumber
+            [(ngModel)]="screenData!.avgViewer"
+            [disabled]="isViewMode">
+          </p-inputNumber>
+        </div>
+        <div class="flex flex-column gap-1 flex-1">
+          <label class="font-medium">Base Price</label>
+          <p-inputNumber
+            [(ngModel)]="screenData!.basePrice"
+            mode="currency"
+            currency="USD"
+            [disabled]="isViewMode">
+          </p-inputNumber>
+        </div>
+      </div>
+
+    </div>
+  </ng-template>
+
+  <ng-template pTemplate="footer">
+    <p-button
+      label="Close"
+      severity="secondary"
+      (onClick)="onClose()">
+    </p-button>
+    <p-button
+      *ngIf="!isViewMode"
+      label="Save"
+      (onClick)="onSubmit()">
+    </p-button>
+  </ng-template>
+
+</p-dialog>
