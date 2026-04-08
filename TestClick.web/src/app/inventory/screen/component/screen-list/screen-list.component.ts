@@ -1,12 +1,6 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { ScreenService } from '../../service/screen.service';
-import { selParamModel } from '../../../../shared/model/param.model';
 import {
   mScreen,
-  mScreenDel,
-  mScreenFilter,
-  mScreenIns,
-  mScreenUpd,
 } from '../../model/screen.model';
 import {
   gridResponse,
@@ -27,6 +21,7 @@ export class ScreenListComponent
   extends ScreenBaseComponent
   implements OnInit, OnDestroy
 {
+  @ViewChild('screenAddEdit') screenAddEdit!: ScreenAddEditComponent;
   private __unSubscribeAll$: Subject<any>;
 
   columns = screenColumns;
@@ -35,8 +30,6 @@ export class ScreenListComponent
   isLoading = false;
   first = 0;
   rows = 10;
-
-  @ViewChild('screenAddEdit') screenAddEdit!: ScreenAddEditComponent;
 
   constructor() {
     super();
@@ -52,6 +45,7 @@ export class ScreenListComponent
       offset: 0,
       pageSize: 53,
     };
+    this.isLoading = true;
     this._screenService
       .getScreen(param)
       .pipe(
@@ -60,7 +54,6 @@ export class ScreenListComponent
       )
       .subscribe((response: responseModel<gridResponse<mScreen>>) => {
         if (response.type === responseStatuEnum.success && response.data.data) {
-          this.isLoading = true;
           this.screens = [...response.data.data];
           this.isLoading = false;
         }
@@ -68,17 +61,17 @@ export class ScreenListComponent
   }
 
   onAdd(): void {
-    this.selectedScreen = {} as mScreen;
+    this.screenAddEdit.screenData = {} as mScreen;
     this.screenAddEdit.open();
   }
 
   onEdit(screen: mScreen): void {
-    this.selectedScreen = { ...screen };
+    this.screenAddEdit.screenData = { ...screen };
     this.screenAddEdit.open();
   }
 
   onView(screen: mScreen): void {
-    this.selectedScreen = { ...screen };
+    this.screenAddEdit.screenData = { ...screen };
     this.screenAddEdit.openViewMode();
   }
 
@@ -88,18 +81,28 @@ export class ScreenListComponent
       header: 'Confirm Delete',
       icon: 'pi pi-exclamation-triangle',
       acceptButtonStyleClass: 'p-button-danger',
-      accept: () => {}
+      accept: () => {
+        this.showToast('info', 'Info', 'Screen deleted !');
+      },
     });
   }
 
-  onScreenSaved(): void {
-    this.screenAddEdit.close();
-    this.selectedScreen = {} as mScreen;
-    this.showToast('success', 'Success', 'Screen saved successfully.');
+  onScreenSaved(action: string): void {
+    if (action === 'Add') {
+      this.screenAddEdit.screenData;
+      //Success API response
+      this.showToast('success', 'Created', 'Screen created successfully.');
+      this.screenAddEdit.close();
+      this.selectedScreen = {} as mScreen;
+    } else {
+      this.showToast('success', 'Updated', 'Screen updated successfully.');
+      this.screenAddEdit.close();
+      this.selectedScreen = {} as mScreen;
+    }
   }
 
   onScreenCancelled(): void {
-    this.selectedScreen = {} as mScreen;
+    this.screenAddEdit.screenData = {} as mScreen;
   }
 
   pageChange(event: any) {
@@ -110,6 +113,10 @@ export class ScreenListComponent
   private showToast(severity: string, summary: string, detail: string): void {
     this._messageService.add({ severity, summary, detail, life: 3000 });
   }
+
+  // toggle() {
+  //   this.something = !this.something;
+  // }
 
   ngOnDestroy(): void {
     this.__unSubscribeAll$.next(null);

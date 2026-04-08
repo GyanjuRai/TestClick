@@ -1,3 +1,12 @@
 .text-primary {
-    color: var(--primary-text);
+  color: var(--primary-text);
+}
+
+li.active > a {
+  color: var(--primary-color) !important;
+  font-weight: 600;
+}
+
+li.active > a span {
+  color: inherit;
 }

@@ -9,8 +9,8 @@ export const ROUTE_PATHS = {
   LAYOUT: '',
   
   INVENTORY: 'inv',
-  INVENTORY_SCREEN: 'inv/screen',
+  INVENTORY_SCREEN: 'screen',
   
   NOT_FOUND: '404',
   WILDCARD: '**',
-} as const;
+};

@@ -8,7 +8,7 @@ export const layoutRoutes = [
     component: MainLayoutComponent,
     children: [
       {
-        path: '',
+        path: ROUTE_PATHS.INVENTORY,
         loadChildren: () =>
           import('../inventory/inventory.module').then(
             (c) => c.InventoryModule,

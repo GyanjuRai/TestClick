@@ -18,3 +18,8 @@ export enum screenPlacementTypeEnum {
     Outdoor = 2
 }
 
+export enum screenStatusEnum {
+    Active = 1,
+    Inactive = 2
+}
+

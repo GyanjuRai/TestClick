@@ -1,3 +1,5 @@
+import { screenPlacementTypeEnum } from "../../../shared/model/enum";
+
 export interface mScreen {
   id: number;
   tenantId?: number;

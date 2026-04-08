@@ -1,5 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { mScreen } from '../../model/screen.model';
+import { screenPlacementTypeEnum, screenStatusEnum, screenTypeEnum } from '../../../../shared/model/enum';
+import { enumToOptions } from '../../../../shared';
 
 @Component({
   selector: 'screen-add-edit',
@@ -7,12 +9,15 @@ import { mScreen } from '../../model/screen.model';
   styleUrl: './screen-add-edit.component.scss',
 })
 export class ScreenAddEditComponent {
-  @Input() screenData: mScreen | null = null;
-  @Output() onSave = new EventEmitter<void>();
+  screenData = {} as mScreen;
+  @Output() onSave = new EventEmitter<any>();
   @Output() onCancel = new EventEmitter<void>();
 
   isVisible = false;
   isViewMode = false;
+  protected placementTypeOptions = enumToOptions(screenPlacementTypeEnum);
+  protected screenTypeOptions = enumToOptions(screenTypeEnum);
+  protected statusTypeOtpions = enumToOptions(screenStatusEnum);
 
   open(): void {
     this.isViewMode = false;
@@ -31,11 +36,12 @@ export class ScreenAddEditComponent {
 
   get dialogHeader(): string {
     if (this.isViewMode) return 'View Screen';
-    return this.screenData ? 'Edit Screen' : 'Add Screen';
+    return this.screenData?.id ? 'Edit Screen' : 'Add Screen';
   }
 
   onSubmit(): void {
-    this.onSave.emit();
+    const action = this.screenData?.id ? 'Edit' : 'Add';
+    this.onSave.emit(action);
   }
 
   onClose(): void {

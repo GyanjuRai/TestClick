@@ -25,7 +25,7 @@
             <div
               pRipple
               pStyleClass="@next"
-              enterClass="hidden"
+              enterFromClass="hidden"
               enterActiveClass="slidedown"
               leaveToClass="hidden"
               leaveActiveClass="slideup"
@@ -35,10 +35,17 @@
               <i class="pi pi-chevron-down"></i>
             </div>
             <ul class="list-none p-0 m-0 overflow-hidden">
-              <li>
+              <li
+                routerLinkActive="active"
+                [routerLinkActiveOptions]="{ exact: true }"
+              >
                 <a
                   pRipple
-                  [routerLink]="[routes.INVENTORY, routes.INVENTORY_SCREEN]"
+                  [routerLink]="[
+                    '/',
+                    routes.INVENTORY,
+                    routes.INVENTORY_SCREEN,
+                  ]"
                   class="flex align-items-center cursor-pointer p-3 border-round text-700 no-underline hover:surface-100 transition-duration-150 transition-colors p-ripple"
                 >
                   <i class="pi pi-desktop mr-2"></i>

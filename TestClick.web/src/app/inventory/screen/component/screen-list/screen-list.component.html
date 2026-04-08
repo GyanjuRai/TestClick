@@ -2,16 +2,11 @@
 <p-confirmDialog></p-confirmDialog>
 
 <div class="card">
-    <ng-template pTemplate="header">
-        <div class="flex align-items-center justify-content-between p-3">
-      <span class="text-xl font-semibold">Screens</span>
-      <p-button
-        label="Add Screen"
-        icon="pi pi-plus"
-        (onClick)="onAdd()">
-      </p-button>
-    </div>
-  </ng-template>
+  <div class="flex align-items-center justify-content-between p-3">
+    <span class="text-xl font-semibold">Screens</span>
+    <p-button label="Add Screen" icon="pi pi-plus" (onClick)="onAdd()">
+    </p-button>
+  </div>
 
   <!-- Table -->
   <p-table
@@ -27,8 +22,8 @@
     [showCurrentPageReport]="true"
     currentPageReportTemplate="Showing {first} to {last} of {totalRecords} screens"
     [globalFilterFields]="['screenName', 'country', 'city', 'placement']"
-    #screenTable>
-
+    #screenTable
+  >
     <ng-template pTemplate="caption">
       <div class="flex justify-content-end">
         <p-iconField iconPosition="left">
@@ -37,7 +32,10 @@
             pInputText
             type="text"
             placeholder="Search screens..."
-            (input)="screenTable.filterGlobal($any($event.target).value, 'contains')"/>
+            (input)="
+              screenTable.filterGlobal($any($event.target).value, 'contains')
+            "
+          />
         </p-iconField>
       </div>
     </ng-template>
@@ -54,23 +52,21 @@
     <ng-template pTemplate="body" let-screen let-columns="columns">
       <tr>
         <td *ngFor="let col of columns">
-
           <ng-container *ngIf="col.name === 'status'; else defaultCell">
             <p-tag
               [value]="screen.status === 1 ? 'Active' : 'Inactive'"
-              [severity]="screen.status === 1 ? 'success' : 'danger'">
+              [severity]="screen.status === 1 ? 'success' : 'danger'"
+            >
             </p-tag>
           </ng-container>
 
           <ng-template #defaultCell>
             {{ screen[col.name] }}
           </ng-template>
-
         </td>
 
         <td class="text-center">
           <div class="flex justify-content-center gap-1">
-
             <p-button
               icon="pi pi-eye"
               severity="info"
@@ -78,7 +74,8 @@
               [rounded]="true"
               pTooltip="View"
               tooltipPosition="top"
-              (onClick)="onView(screen)">
+              (onClick)="onView(screen)"
+            >
             </p-button>
 
             <p-button
@@ -88,7 +85,8 @@
               [rounded]="true"
               pTooltip="Edit"
               tooltipPosition="top"
-              (onClick)="onEdit(screen)">
+              (onClick)="onEdit(screen)"
+            >
             </p-button>
 
             <p-button
@@ -98,19 +96,19 @@
               [rounded]="true"
               pTooltip="Delete"
               tooltipPosition="top"
-              (onClick)="onDelete(screen)">
+              (onClick)="onDelete(screen)"
+            >
             </p-button>
-
           </div>
         </td>
       </tr>
     </ng-template>
-  </p-table> 
+  </p-table>
 </div>
 
 <screen-add-edit
   #screenAddEdit
-  [screenData]="selectedScreen"
-  (onSave)="onScreenSaved()"
-  (onCancel)="onScreenCancelled()">
+  (onSave)="onScreenSaved($event)"
+  (onCancel)="onScreenCancelled()"
+>
 </screen-add-edit>

@@ -1,3 +1,16 @@
+import { ModuleWithProviders } from '@angular/core';
 
 export * from './module/shared-ui.module';
-// other exports; add here
+export * from './utility/enum.util';
+
+
+// export class CoreModules {
+//     static forRoot(): ModuleWithProviders<CommonModule> {
+//         return {
+//             ngModule: CoreModule,
+//             providers: [
+                
+//             ]
+//         }
+//     };
+// }

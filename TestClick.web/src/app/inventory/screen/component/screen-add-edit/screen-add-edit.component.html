@@ -2,21 +2,21 @@
   [(visible)]="isVisible"
   [header]="dialogHeader"
   [modal]="true"
-  [draggable]="false"
+  [draggable]="true"
   [resizable]="false"
-  styleClass="w-30rem"
-  (onHide)="onClose()">
-
+  styleClass="w-35rem h-35rem"
+  (onHide)="onClose()"
+>
   <ng-template pTemplate="content">
     <div class="flex flex-column gap-3">
-
       <div class="flex flex-column gap-1">
         <label class="font-medium">Screen Name</label>
         <input
           pInputText
           [(ngModel)]="screenData!.screenName"
           [disabled]="isViewMode"
-          placeholder="Enter screen name"/>
+          placeholder="Enter screen name"
+        />
       </div>
 
       <div class="flex flex-column gap-1">
@@ -25,7 +25,8 @@
           pInputText
           [(ngModel)]="screenData!.specification"
           [disabled]="isViewMode"
-          placeholder="Enter specification"/>
+          placeholder="Enter specification"
+        />
       </div>
 
       <div class="flex gap-3">
@@ -35,7 +36,8 @@
             pInputText
             [(ngModel)]="screenData!.country"
             [disabled]="isViewMode"
-            placeholder="Country"/>
+            placeholder="Country"
+          />
         </div>
         <div class="flex flex-column gap-1 flex-1">
           <label class="font-medium">City</label>
@@ -43,17 +45,47 @@
             pInputText
             [(ngModel)]="screenData!.city"
             [disabled]="isViewMode"
-            placeholder="City"/>
+            placeholder="City"
+          />
         </div>
       </div>
 
-      <div class="flex flex-column gap-1">
-        <label class="font-medium">Placement</label>
-        <input
-          pInputText
-          [(ngModel)]="screenData!.placement"
-          [disabled]="isViewMode"
-          placeholder="Placement"/>
+      <div class="flex gap-3">
+        <div class="flex flex-column gap-1">
+          <label class="font-medium">Placement</label>
+          <p-dropdown
+            [options]="placementTypeOptions"
+            optionLabel="label"
+            optionValue="value"
+            [disabled]="isViewMode"
+            [(ngModel)]="screenData!.placementType"
+            placeholder="Placement type"
+          />
+        </div>
+
+        <div class="flex flex-column gap-1">
+          <label class="font-medium">status</label>
+          <p-dropdown
+            [options]="statusTypeOtpions"
+            optionLabel="label"
+            optionValue="value"
+            [disabled]="isViewMode"
+            [(ngModel)]="screenData!.status"
+            placeholder="Placement type"
+          />
+        </div>
+
+        <div class="flex flex-column gap-1">
+          <label class="font-medium">Screen</label>
+          <p-dropdown
+            [options]="screenTypeOptions"
+            optionLabel="label"
+            optionValue="value"
+            [disabled]="isViewMode"
+            [(ngModel)]="screenData!.type"
+            placeholder="Screen type"
+          />
+        </div>
       </div>
 
       <div class="flex gap-3">
@@ -61,7 +93,8 @@
           <label class="font-medium">Avg. Viewers</label>
           <p-inputNumber
             [(ngModel)]="screenData!.avgViewer"
-            [disabled]="isViewMode">
+            [disabled]="isViewMode"
+          >
           </p-inputNumber>
         </div>
         <div class="flex flex-column gap-1 flex-1">
@@ -70,25 +103,18 @@
             [(ngModel)]="screenData!.basePrice"
             mode="currency"
             currency="USD"
-            [disabled]="isViewMode">
+            [disabled]="isViewMode"
+          >
           </p-inputNumber>
         </div>
       </div>
-
     </div>
   </ng-template>
 
   <ng-template pTemplate="footer">
-    <p-button
-      label="Close"
-      severity="secondary"
-      (onClick)="onClose()">
+    <p-button label="Close" severity="secondary" (onClick)="onClose()">
     </p-button>
-    <p-button
-      *ngIf="!isViewMode"
-      label="Save"
-      (onClick)="onSubmit()">
+    <p-button *ngIf="!isViewMode" label="Save" (onClick)="onSubmit()">
     </p-button>
   </ng-template>
-
 </p-dialog>
