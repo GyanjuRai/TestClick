@@ -1,4 +1,4 @@
-export enum responseStatuEnum {
+export enum responseStatusEnum {
     success = 'Success',
     failure = 'Failure',
     notFound = 'NotFound',

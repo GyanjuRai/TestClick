@@ -4,7 +4,7 @@
 <div class="card">
   <div class="flex align-items-center justify-content-between p-3">
     <span class="text-xl font-semibold">Screens</span>
-    <p-button label="Add Screen" icon="pi pi-plus" (onClick)="onAdd()">
+    <p-button label="Add Screen" icon="pi pi-plus" (onClick)="openForm()">
     </p-button>
   </div>
 
@@ -74,7 +74,6 @@
               [rounded]="true"
               pTooltip="View"
               tooltipPosition="top"
-              (onClick)="onView(screen)"
             >
             </p-button>
 
@@ -85,7 +84,7 @@
               [rounded]="true"
               pTooltip="Edit"
               tooltipPosition="top"
-              (onClick)="onEdit(screen)"
+              (onClick)="openForm(screen)"
             >
             </p-button>
 
@@ -96,7 +95,6 @@
               [rounded]="true"
               pTooltip="Delete"
               tooltipPosition="top"
-              (onClick)="onDelete(screen)"
             >
             </p-button>
           </div>
@@ -108,7 +106,6 @@
 
 <screen-add-edit
   #screenAddEdit
-  (onSave)="onScreenSaved($event)"
-  (onCancel)="onScreenCancelled()"
->
-</screen-add-edit>
+  [screen]="selectedScreen"
+  (afterFormClosed)="afterFormClosed($event)"
+/>

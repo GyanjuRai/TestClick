@@ -17,11 +17,11 @@ export class ScreenService {
        return  this.api.get(`${this.baseUrl}/GetScreen`, param);
     }
 
-    postScreen(param: mScreenIns): Observable<responseModel<mScreen[]>> {
+    addScreen(param: mScreenIns): Observable<responseModel<mScreen[]>> {
         return this.api.post(`${this.baseUrl}/ScreenIns`, param);
     }
 
-    putScreen(param: mScreenUpd): Observable<responseModel<mScreen[]>> {
+    editScreen(param: mScreenUpd): Observable<responseModel<mScreen[]>> {
         return this.api.put(`${this.baseUrl}/ScreenUpd`, param);
     }
 
