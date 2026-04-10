@@ -16,6 +16,8 @@ import { TagModule } from 'primeng/tag';
 import { DialogModule } from 'primeng/dialog'
 import { InputNumberModule } from 'primeng/inputnumber';
 import { DropdownModule } from 'primeng/dropdown';
+import { FieldsetModule } from 'primeng/fieldset';
+import { ChipModule } from 'primeng/chip'
 
 import { ConfirmationService, MessageService } from "primeng/api";
 
@@ -37,6 +39,8 @@ const PRIME_NG_MODULES = [
         DialogModule,
         InputNumberModule,
         DropdownModule,
+        FieldsetModule,
+        ChipModule
 ];
  
 @NgModule({

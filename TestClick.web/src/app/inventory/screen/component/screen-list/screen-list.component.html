@@ -15,7 +15,7 @@
     [loading]="isLoading"
     [paginator]="true"
     [rows]="rows"
-    [first]="first"
+    [(first)]="first"
     (onPage)="pageChange($event)"
     [rowsPerPageOptions]="[10, 25, 50]"
     pagnia
@@ -74,6 +74,7 @@
               [rounded]="true"
               pTooltip="View"
               tooltipPosition="top"
+              (onClick)="openDetailView(screen)"
             >
             </p-button>
 
@@ -95,6 +96,7 @@
               [rounded]="true"
               pTooltip="Delete"
               tooltipPosition="top"
+              (onClick)="onDelete(screen)"
             >
             </p-button>
           </div>
@@ -103,6 +105,8 @@
     </ng-template>
   </p-table>
 </div>
+
+<screen-detail #screenDetail [screen]="selectedScreen" (afterClose)="afterViewDetailClose()" />
 
 <screen-add-edit
   #screenAddEdit

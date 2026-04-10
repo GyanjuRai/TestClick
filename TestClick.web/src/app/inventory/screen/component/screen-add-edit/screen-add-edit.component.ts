@@ -35,7 +35,7 @@ export class ScreenAddEditComponent
   @Input() screen: mScreen = {} as mScreen;
   @Output() afterFormClosed = new EventEmitter<mScreen | null>();
   protected formGroup!: FormGroup;
-  protected formOpen = false;
+  protected isOpen = false;
 
   private __unSubscribeAll$ = new Subject<any>();
   protected placementTypeOptions = enumToOptions(screenPlacementTypeEnum);
@@ -86,7 +86,7 @@ export class ScreenAddEditComponent
    * To open the screen.
    */
   public open() {
-    this.formOpen = true;
+    this.isOpen = true;
   }
 
   protected get dialogHeader(): string {
@@ -122,29 +122,29 @@ export class ScreenAddEditComponent
                   response.type === responseStatusEnum.success &&
                   response.data.length > 0
                 ) {
-                  this._messageService.add({
-                    severity: 'success',
-                    summary: 'Success',
-                    detail: `Screen ${response.data[0].screenName} Added`,
-                  });
+                  this.showToast(
+                    'success',
+                    'Sucess',
+                    `Screen ${response.data[0].screenName} Added`,
+                  );
                   this.close(response.data[0]);
                 } else {
-                  this._messageService.add({
-                    severity: 'error',
-                    summary: 'Failed',
-                    detail: `Failed to add ${screenAddParam.screenName}. ${response.message} `,
-                  });
+                  this.showToast(
+                    'error',
+                    'Failed',
+                    `Failed to add ${screenAddParam.screenName}. ${response.message} `,
+                  );
                   this.afterFormClosed.emit(null);
                   return;
                 }
               },
               error: () => {
-                this._messageService.add({
-                  severity: 'error',
-                  summary: 'Error',
-                  detail: `Failted to Add.
+                this.showToast(
+                  'error',
+                  'Error',
+                  `Failted to Add.
                           Server error.`,
-                });
+                );
                 this.afterFormClosed.emit(null);
                 return;
               },
@@ -162,47 +162,43 @@ export class ScreenAddEditComponent
             .subscribe({
               next: (response: responseModel<mScreen[]>) => {
                 if (response.type === responseStatusEnum.success) {
-                  this._messageService.add({
-                    severity: 'success',
-                    summary: 'Success',
-                    detail: `Screen ${response.data[0].screenName} Edited`,
-                  });
+                  this.showToast(
+                    'success',
+                    'Success',
+                    `Screen ${response.data[0].screenName} Edited`,
+                  );
                   this.close(response.data[0]);
                 } else {
-                  this._messageService.add({
-                    severity: 'error',
-                    summary: 'Failed',
-                    detail: `Failed to add ${screenEditParam.screenName}. ${response.message} `,
-                  });
+                  this.showToast(
+                    'error',
+                    'Failed',
+                    `Failed to add ${screenEditParam.screenName}. ${response.message} `,
+                  );
                   this.afterFormClosed.emit(null);
                   return;
                 }
               },
               error: (ex: any) => {
-                this._messageService.add({
-                  severity: 'error',
-                  summary: 'Error',
-                  detail: `Failted to eidt.
+                this.showToast(
+                  'error',
+                  'Error',
+                  `Failted to eidt.
                           Server error.`,
-                });
+                );
                 this.close(null);
               },
             });
         }
       } else {
-        this._messageService.add({
-          severity: 'info',
-          summary: 'Info',
-          detail: `Please enter the correct value.`,
-        });
+        this.showToast('info', 'Info', `Please enter the correct value.`);
         return;
       }
     } else {
-      this._messageService.add({
-        severity: 'info',
-        summary: 'Info',
-        detail: `Please modify the form values before ${this.btnLabel}ing.`,
-      });
+      this.showToast(
+        'info',
+        'Info',
+        `Please modify the form values before ${this.btnLabel}ing.`,
+      );
       return;
     }
   }
@@ -214,7 +210,7 @@ export class ScreenAddEditComponent
   private close(screen: mScreen | null) {
     this.screen = {} as mScreen;
     this.afterFormClosed.emit(screen);
-    this.formOpen = false;
+    this.isOpen = false;
   }
 
   ngOnDestroy(): void {

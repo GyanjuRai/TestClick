@@ -6,7 +6,7 @@ import {
   OnInit,
   ViewChild,
 } from '@angular/core';
-import { mScreen } from '../../model/screen.model';
+import { mScreen, mScreenDel } from '../../model/screen.model';
 import {
   gridResponse,
   responseModel,
@@ -17,6 +17,8 @@ import { screenColumns } from '../../model/screen-list.column';
 import { AppComponent } from '../../../../app.component';
 import { ScreenService } from '../../service/screen.service';
 import { ScreenAddEditComponent } from '../screen-add-edit/screen-add-edit.component';
+import { ScreenDetailComponent } from '../screen-detail/screen-detail.component';
+import { ConfirmationOptions } from '../../../../core/model/confirmation.model';
 
 @Component({
   selector: 'screen-list',
@@ -29,6 +31,8 @@ export class ScreenListComponent
 {
   @ViewChild('screenAddEdit')
   screenAddEditForm!: ScreenAddEditComponent;
+  @ViewChild('screenDetail')
+  screenDetail!: ScreenDetailComponent;
 
   private __unSubscribeAll$: Subject<any>;
 
@@ -54,7 +58,7 @@ export class ScreenListComponent
   protected loadScreens() {
     const param = {
       offset: 0,
-      pageSize: 53,
+      pageSize: 58,
     };
     this.isLoading = true;
     this._screenService
@@ -89,21 +93,67 @@ export class ScreenListComponent
         this.screens[index] = screen;
         this.screens = [...this.screens];
       } else {
-        this.screens = [screen, ...this.screens];
+        this.screens = [
+          ...this.screens.slice(0, this.first),
+          screen,
+          ...this.screens.splice(this.first),
+        ];
       }
     }
     this.selectedScreen = {} as mScreen;
   }
 
-  // TODO: I have to change not here for now.
+  protected openDetailView(screen: mScreen) {
+    this.selectedScreen = { ...screen };
+    this.screenDetail.open();
+  }
+
+  afterViewDetailClose() {
+    this.selectedScreen = {} as mScreen;
+  }
+
   onDelete(screen: mScreen): void {
-    this._confirmationService.confirm({
+    const confirmDialogOptions = {
       message: `Are you sure you want to delete <b>${screen.screenName}</b>?`,
       header: 'Confirm Delete',
       icon: 'pi pi-exclamation-triangle',
       acceptButtonStyleClass: 'p-button-danger',
-      accept: () => {},
-    });
+      onAccept: () => {
+        const deleteParam = {
+          id: screen.id,
+          updatedBy: screen.updatedBy,
+        } as mScreenDel;
+        this._screenService
+          .deleteScreen(deleteParam)
+          .pipe(takeUntil(this.__unSubscribeAll$))
+          .subscribe({
+            next: (response: responseModel<mScreen>) => {
+              if (
+                response.type === responseStatusEnum.success &&
+                response.data
+              ) {
+                const index = this.screens.findIndex((s) => s.id === screen.id);
+                this.screens.splice(index, 1);
+                this.screens = [...this.screens];
+                this.showToast(
+                  'info',
+                  'Deleted',
+                  `Screen ${screen.screenName} is deleted.`,
+                );
+              }
+            },
+            error: () => {
+              this.showToast(
+                'error',
+                'Failed',
+                `Failed to delete ${screen.screenName}.`,
+              );
+            },
+          });
+      },
+    } as ConfirmationOptions;
+
+    this.openConfirmationBox(confirmDialogOptions);
   }
 
   pageChange(event: any) {

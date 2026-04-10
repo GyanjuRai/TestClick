@@ -1,1 +1,317 @@
-<p>screen-detail works!</p>
+<p-dialog
+  [modal]="true"
+  [(visible)]="isOpen"
+  [draggable]="false"
+  [maximizable]="true"
+  [style]="{ width: '50rem' }"
+  [breakpoints]="{ '1199px': '75vw', '575px': '90vw' }"
+  (onHide)="close()"
+>
+  <ng-template pTemplate="header">
+    <div class="flex align-items-center gap-3 flex-1">
+      <div
+        class="flex align-items-center justify-content-center border-round-lg surface-100 p-2"
+      >
+        <i
+          class="pi pi-desktop text-color-secondary"
+          style="font-size: 1.2rem"
+        ></i>
+      </div>
+      <div class="flex flex-column gap-1">
+        <span class="font-semibold text-900" style="font-size: 1rem">{{
+          screen.screenName
+        }}</span>
+        <span class="text-color-secondary" style="font-size: 0.8rem">
+          {{ screen.city }},
+          {{ screen.country }}
+        </span>
+      </div>
+    </div>
+    <p-tag
+      [value]="screen.status | screenStatus"
+      [severity]="screen.status === 1 ? 'success' : 'danger'"
+      [rounded]="true"
+      styleClass="mr-2"
+    >
+    </p-tag>
+  </ng-template>
+
+  <ng-template pTemplate="content">
+    <div class="grid m-0 border-bottom-1 surface-border">
+      <div class="col-3 p-3 border-right-1 surface-border">
+        <p
+          class="text-xs text-color-secondary uppercase font-medium m-0 mb-2"
+          style="letter-spacing: 0.05em"
+        >
+          Base price
+        </p>
+        <p class="font-semibold text-green-700 m-0" style="font-size: 1.1rem">
+          {{ screen.basePrice | currency }}
+        </p>
+      </div>
+      <div class="col-3 p-3 border-right-1 surface-border"  >
+        <p
+          class="text-xs text-color-secondary uppercase font-medium m-0 mb-2"
+          style="letter-spacing: 0.05em"
+        >
+          Avg viewers
+        </p>
+        <p class="font-semibold text-900 m-0" style="font-size: 1.1rem">
+          {{ screen.avgViewer | number }}
+        </p>
+      </div>
+      <div class="col-3 p-3 border-right-1 surface-border">
+        <p
+          class="text-xs text-color-secondary uppercase font-medium m-0 mb-2"
+          style="letter-spacing: 0.05em"
+        >
+          Placement type
+        </p>
+        <p-tag
+          [value]="screen.placementType | placementType"
+          severity="secondary"
+          styleClass="mt-1"
+        >
+        </p-tag>
+      </div>
+      <div class="col-3 p-3">
+        <p
+          class="text-xs text-color-secondary uppercase font-medium m-0 mb-2"
+          style="letter-spacing: 0.05em"
+        >
+          Screen type
+        </p>
+        <p-tag
+          [value]="screen.type | screenType"
+          severity="secondary"
+          styleClass="mt-1"
+        >
+        </p-tag>
+      </div>
+    </div>
+
+    <div class="px-4 py-3 border-bottom-1 surface-border">
+      <p
+        class="text-xs font-semibold text-color-secondary uppercase m-0 mb-3"
+        style="letter-spacing: 0.07em"
+      >
+        Location &amp; identity
+      </p>
+      <div class="grid m-0">
+        <div class="col-6 pl-0 pr-4">
+          <div
+            class="flex justify-content-between align-items-center py-2 border-bottom-1 surface-border"
+          >
+            <span class="text-color-secondary" style="font-size: 0.875rem"
+              >Screen name</span
+            >
+            <span class="font-medium text-900" style="font-size: 0.875rem">{{
+              screen.screenName
+            }}</span>
+          </div>
+          <div
+            class="flex justify-content-between align-items-center py-2 border-bottom-1 surface-border"
+          >
+            <span class="text-color-secondary" style="font-size: 0.875rem"
+              >Country</span
+            >
+            <span class="font-medium text-900" style="font-size: 0.875rem">{{
+              screen.country
+            }}</span>
+          </div>
+          <div
+            class="flex justify-content-between align-items-center py-2 border-bottom-1 surface-border"
+          >
+            <span class="text-color-secondary" style="font-size: 0.875rem"
+              >City</span
+            >
+            <span class="font-medium text-900" style="font-size: 0.875rem">{{
+              screen.city
+            }}</span>
+          </div>
+          <div class="flex justify-content-between align-items-center py-2">
+            <span class="text-color-secondary" style="font-size: 0.875rem"
+              >Placement</span
+            >
+            <span class="font-medium text-900" style="font-size: 0.875rem">{{
+              screen.placement
+            }}</span>
+          </div>
+        </div>
+        <div class="col-6 pr-0 pl-4 border-left-1 surface-border">
+          <div
+            class="flex justify-content-between align-items-center py-2 border-bottom-1 surface-border"
+          >
+            <span class="text-color-secondary" style="font-size: 0.875rem"
+              >Placement type</span
+            >
+            <p-tag
+              [value]="screen.placementType | placementType"
+              severity="secondary"
+            ></p-tag>
+          </div>
+          <div
+            class="flex justify-content-between align-items-center py-2 border-bottom-1 surface-border"
+          >
+            <span class="text-color-secondary" style="font-size: 0.875rem"
+              >Screen type</span
+            >
+            <p-tag
+              [value]="screen.type | screenType"
+              severity="secondary"
+            ></p-tag>
+          </div>
+          <div class="flex justify-content-between align-items-center py-2">
+            <span class="text-color-secondary" style="font-size: 0.875rem"
+              >Status</span
+            >
+            <p-tag
+              [value]="screen.status | screenStatus"
+              severity="success"
+            ></p-tag>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="px-4 py-3 border-bottom-1 surface-border">
+      <p
+        class="text-xs font-semibold text-color-secondary uppercase m-0 mb-3"
+        style="letter-spacing: 0.07em"
+      >
+        Specification &amp; pricing
+      </p>
+      <div class="grid m-0">
+        <div class="col-6 pl-0 pr-4">
+          <div
+            class="flex justify-content-between align-items-center py-2 border-bottom-1 surface-border"
+          >
+            <span class="text-color-secondary" style="font-size: 0.875rem"
+              >Specification</span
+            >
+            <code
+              class="surface-100 text-color-secondary border-round px-2 py-1"
+              style="font-size: 0.8rem"
+              >{{ screen.specification }}</code
+            >
+          </div>
+          <div class="flex justify-content-between align-items-center py-2">
+            <span class="text-color-secondary" style="font-size: 0.875rem"
+              >Base price</span
+            >
+            <span
+              class="font-semibold text-green-700"
+              style="font-size: 0.875rem"
+              >{{ screen.basePrice | currency }}</span
+            >
+          </div>
+        </div>
+        <div class="col-6 pr-0 pl-4 border-left-1 surface-border">
+          <div
+            class="flex justify-content-between align-items-center py-2 border-bottom-1 surface-border"
+          >
+            <span class="text-color-secondary" style="font-size: 0.875rem"
+              >Avg viewers</span
+            >
+            <span class="font-medium text-900" style="font-size: 0.875rem">{{
+              screen.avgViewer | number
+            }}</span>
+          </div>
+          <div class="flex justify-content-between align-items-center py-2">
+            <span class="text-color-secondary" style="font-size: 0.875rem"
+              >Tenant</span
+            >
+            <span class="font-medium text-900" style="font-size: 0.875rem"
+              >ASEAN Outdoor</span
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="px-4 py-3 border-bottom-1 surface-border">
+      <p
+        class="text-xs font-semibold text-color-secondary uppercase m-0 mb-3"
+        style="letter-spacing: 0.07em"
+      >
+        Assigned players
+      </p>
+      <div class="flex flex-wrap gap-2">
+        <p-chip
+          *ngFor="let player of screen.players?.split(',')"
+          [label]="player.trim()"
+          icon="pi pi-desktop"
+          styleClass="surface-100 text-color-secondary"
+        >
+        </p-chip>
+        <span
+          *ngIf="!screen.players"
+          class="text-color-secondary"
+          style="font-size: 0.875rem"
+          >No players assigned</span
+        >
+      </div>
+      <div *ngIf="screen.screenPlayer" class="mt-2">
+        <span class="text-color-secondary" style="font-size: 0.8rem"
+          >Screen player:&nbsp;</span
+        >
+        <code
+          class="surface-100 text-color-secondary border-round px-2 py-1"
+          style="font-size: 0.8rem"
+          >{{ screen.screenPlayer }}</code
+        >
+      </div>
+    </div>
+
+    <div class="px-4 py-3">
+      <p
+        class="text-xs font-semibold text-color-secondary uppercase m-0 mb-3"
+        style="letter-spacing: 0.07em"
+      >
+        Audit trail
+      </p>
+      <div class="grid m-0">
+        <div class="col-6 pl-0 pr-4">
+          <div
+            class="flex justify-content-between align-items-center py-2 border-bottom-1 surface-border"
+          >
+            <span class="text-color-secondary" style="font-size: 0.875rem"
+              >Created by</span
+            >
+            <span class="font-medium text-900" style="font-size: 0.875rem"
+              >tenant_admin_9</span
+            >
+          </div>
+          <div class="flex justify-content-between align-items-center py-2">
+            <span class="text-color-secondary" style="font-size: 0.875rem"
+              >Updated by</span
+            >
+            <span class="font-medium text-900" style="font-size: 0.875rem"
+              >tenant_admin_9</span
+            >
+          </div>
+        </div>
+        <div class="col-6 pr-0 pl-4 border-left-1 surface-border">
+          <div
+            class="flex justify-content-between align-items-center py-2 border-bottom-1 surface-border"
+          >
+            <span class="text-color-secondary" style="font-size: 0.875rem"
+              >Updated at</span
+            >
+            <span class="font-medium text-900" style="font-size: 0.875rem">{{
+              screen.updatedAt | date: "dd MMM yyyy, HH:mm"
+            }}</span>
+          </div>
+          <div class="flex justify-content-between align-items-center py-2">
+            <span class="text-color-secondary" style="font-size: 0.875rem"
+              >Tenant ID</span
+            >
+            <span class="font-medium text-900" style="font-size: 0.875rem"
+              >10</span
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+</p-dialog>
